@@ -5,9 +5,14 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {environment} from "../environments/environment";
-import { TestComponent } from './test/test.component';
+import {TestComponent} from './test/test.component';
 import {HttpClientModule} from "@angular/common/http";
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatIconModule} from "@angular/material/icon";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatButtonModule} from "@angular/material/button";
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
@@ -29,9 +34,15 @@ function initializeKeycloak(keycloak: KeycloakService) {
     });
 }
 
+
 @NgModule({
   declarations: [AppComponent, TestComponent],
-  imports: [AppRoutingModule, BrowserModule, KeycloakAngularModule, HttpClientModule],
+  imports: [AppRoutingModule, BrowserModule, KeycloakAngularModule, HttpClientModule, BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule],
   providers: [
     {
       provide: APP_INITIALIZER,
