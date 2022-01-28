@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {environment} from "../environments/environment";
 import { TestComponent } from './test/test.component';
+import {HttpClientModule} from "@angular/common/http";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -19,13 +20,18 @@ function initializeKeycloak(keycloak: KeycloakService) {
         onLoad: 'check-sso',
         silentCheckSsoRedirectUri:
           window.location.origin + '/assets/silent-check-sso.html'
-      }
+      },
+      enableBearerInterceptor: true,
+      bearerPrefix: 'Bearer',
+      bearerExcludedUrls: [
+        '/assets',
+        '/clients/public']
     });
 }
 
 @NgModule({
   declarations: [AppComponent, TestComponent],
-  imports: [AppRoutingModule, BrowserModule, KeycloakAngularModule],
+  imports: [AppRoutingModule, BrowserModule, KeycloakAngularModule, HttpClientModule],
   providers: [
     {
       provide: APP_INITIALIZER,
