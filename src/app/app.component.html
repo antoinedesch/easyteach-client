@@ -14,16 +14,16 @@
 
     <img class="avatar mat-elevation-z8" src="/assets/avatar.png"/>
 
-    <h4 class="name">{{ user.surname.toUpperCase() + ' ' + user.firstName}}</h4>
-    <p class="designation">{{user.profile.valueOf()}}</p>
+    <h4 *ngIf="user" class="name">{{ user.surname.toUpperCase() + ' ' + user.firstName}}</h4>
+    <p *ngIf="user" class="designation">{{user.profile.valueOf()}}</p>
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button">
+    <button [routerLink]="'home'" mat-button class="menu-button">
       <mat-icon>home</mat-icon>
       <span>Accueil</span>
     </button>
-    <button mat-button class="menu-button">
+    <button [routerLink]="'my-class'" mat-button class="menu-button">
       <mat-icon>person</mat-icon>
       <span>Ma classe</span>
     </button>
@@ -42,7 +42,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
-      Main content here!
+      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
+import {MatSidenav} from '@angular/material/sidenav';
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {delay} from "rxjs";
 import {UserHttpServiceService} from "./service/user-http-service.service";
@@ -10,7 +10,7 @@ import {User} from "./models/user";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'easyteach-client';
 
   @ViewChild(MatSidenav)
@@ -18,8 +18,8 @@ export class AppComponent implements OnInit{
 
   user: User;
 
-  constructor(private observer: BreakpointObserver,private userHttpService:UserHttpServiceService) {}
-
+  constructor(private observer: BreakpointObserver, private userHttpService: UserHttpServiceService) {
+  }
 
 
   ngAfterViewInit() {
