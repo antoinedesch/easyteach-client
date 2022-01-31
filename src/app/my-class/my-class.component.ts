@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PupilHttpServiceService} from "../service/pupil-http-service.service";
+import {Pupil} from "../models/pupil";
 
 @Component({
   selector: 'app-my-class',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyClassComponent implements OnInit {
 
-  constructor() { }
+  pupils: Pupil[];
+
+  constructor(private pupilHttpService: PupilHttpServiceService) {
+  }
 
   ngOnInit(): void {
+    this.pupilHttpService.getAllPupils().subscribe((pupils) => {
+      this.pupils = pupils;
+    })
   }
 
 }
