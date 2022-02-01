@@ -4,6 +4,8 @@ import {Pupil} from "../../models/pupil";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
+import {MatDialog} from "@angular/material/dialog";
+import {AddPupilModalComponent} from "../../components/modal/add-pupil-modal/add-pupil-modal.component";
 
 @Component({
   selector: 'app-my-class',
@@ -12,7 +14,7 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class MyClassComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'firstName', 'surname','birthDate','actions'];
+  displayedColumns: string[] = ['id', 'firstName', 'surname', 'birthDate', 'actions'];
   dataSource: MatTableDataSource<Pupil>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -20,7 +22,7 @@ export class MyClassComponent implements OnInit {
 
   pupils: Pupil[];
 
-  constructor(private pupilHttpService: PupilHttpServiceService) {
+  constructor(private pupilHttpService: PupilHttpServiceService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -41,10 +43,24 @@ export class MyClassComponent implements OnInit {
   }
 
   addPupil() {
+    const dialogRef = this.dialog.open(AddPupilModalComponent, {
+      width: '30%',
+      data: new Pupil()
+    });
 
+    dialogRef.afterClosed().subscribe(pupil => {
+      this.pupilHttpService.createPupil(pupil).subscribe(pupil => {
+        this.dataSource.data.push(pupil);
+        this.dataSource._updateChangeSubscription()
+      })
+    });
   }
 
-  goToPupilFile(row: Pupil) {
-    
+  deletePupil(id:number, index:number) {
+    this.pupilHttpService.deletePupil(id).subscribe(() =>{
+      this.dataSource.data.splice(index, 1);
+      this.dataSource._updateChangeSubscription();
+    })
+
   }
 }

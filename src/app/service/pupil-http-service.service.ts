@@ -17,4 +17,12 @@ export class PupilHttpServiceService {
   getAllPupils(): Observable<Pupil[]> {
     return this.httpClient.get<Pupil[]>(environment.apiUrl + "/api/pupil/all").pipe(map((pupils:Pupil[]) => pupils));
   }
+
+  createPupil(pupil:Pupil): Observable<Pupil> {
+    return this.httpClient.post<Pupil>(environment.apiUrl + "/api/pupil/create", pupil).pipe(map((pupil:Pupil) => pupil));
+  }
+
+  deletePupil(id: number): Observable<void> {
+    return this.httpClient.delete<void>(environment.apiUrl + `/api/pupil/delete/${id}` ).pipe(map(()=> {}));
+  }
 }
