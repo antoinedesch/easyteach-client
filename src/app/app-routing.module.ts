@@ -1,13 +1,16 @@
-import {NgModule} from '@angular/core';
+import {NgModule, NgModuleFactory, Type} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "./guard/keycloak-guard";
-import {MyClassComponent} from "./my-class/my-class.component";
 import {HomeComponent} from "./home/home.component";
+import {Observable} from "rxjs";
 
 const routes: Routes = [
   {
     path: '', canActivate: [AuthGuard], children: [
-      {path: 'my-class', component: MyClassComponent},
+      {
+        path: 'my-class',
+        loadChildren: (): Type<any> | NgModuleFactory<any> | Observable<Type<any>> | Promise<any> => import('./modules/my-class/my-class.module').then((module) => module.MyClassModule)
+      },
       {path: 'home', component: HomeComponent},
     ]
   }

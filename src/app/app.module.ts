@@ -12,8 +12,14 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatButtonModule} from "@angular/material/button";
-import {MyClassComponent} from './my-class/my-class.component';
+import {MyClassComponent} from './modules/my-class/my-class.component';
 import {HomeComponent} from './home/home.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatInputModule} from "@angular/material/input";
+import {MatSortModule} from "@angular/material/sort";
+import {CommonModule} from "@angular/common";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -38,13 +44,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
 
 
 @NgModule({
-  declarations: [AppComponent, MyClassComponent, HomeComponent],
-  imports: [AppRoutingModule, BrowserModule, KeycloakAngularModule, HttpClientModule, BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule],
+  declarations: [AppComponent],
+  imports: [AppRoutingModule, BrowserModule, KeycloakAngularModule, HttpClientModule, BrowserAnimationsModule,MatSidenavModule,MatToolbarModule,MatIconModule,MatDividerModule,CommonModule,
+    MatButtonModule],
   providers: [
     {
       provide: APP_INITIALIZER,
