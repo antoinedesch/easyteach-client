@@ -1,7 +1,6 @@
 import {NgModule, NgModuleFactory, Type} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "./guard/keycloak-guard";
-import {HomeComponent} from "./home/home.component";
 import {Observable} from "rxjs";
 
 const routes: Routes = [
@@ -11,7 +10,10 @@ const routes: Routes = [
         path: 'my-class',
         loadChildren: (): Type<any> | NgModuleFactory<any> | Observable<Type<any>> | Promise<any> => import('./modules/my-class/my-class.module').then((module) => module.MyClassModule)
       },
-      {path: 'home', component: HomeComponent},
+      {
+        path: 'home',
+        loadChildren: (): Type<any> | NgModuleFactory<any> | Observable<Type<any>> | Promise<any> => import('./modules/home/home.module').then((module) => module.HomeModule)
+      },
     ]
   }
 ];

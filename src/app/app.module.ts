@@ -5,21 +5,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {environment} from "../environments/environment";
+import {SharedModule} from "./modules/shared/shared.module";
 import {HttpClientModule} from "@angular/common/http";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatIconModule} from "@angular/material/icon";
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatDividerModule} from "@angular/material/divider";
-import {MatButtonModule} from "@angular/material/button";
-import {MyClassComponent} from './modules/my-class/my-class.component';
-import {HomeComponent} from './home/home.component';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatTableModule} from "@angular/material/table";
-import {MatPaginatorModule} from "@angular/material/paginator";
-import {MatInputModule} from "@angular/material/input";
-import {MatSortModule} from "@angular/material/sort";
-import {CommonModule} from "@angular/common";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -45,8 +33,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [AppRoutingModule, BrowserModule, KeycloakAngularModule, HttpClientModule, BrowserAnimationsModule,MatSidenavModule,MatToolbarModule,MatIconModule,MatDividerModule,CommonModule,
-    MatButtonModule],
+  imports: [AppRoutingModule, BrowserModule, KeycloakAngularModule, SharedModule, HttpClientModule, BrowserAnimationsModule],
   providers: [
     {
       provide: APP_INITIALIZER,
