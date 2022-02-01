@@ -36,7 +36,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let row;let i = index" >
-        <button mat-raised-button stopPropagation (click)="deletePupil(row.id,i)"><mat-icon>delete</mat-icon></button>
+        <button mat-raised-button stopPropagation (click)="deletePupilConfirmation(row.id,i)"><mat-icon>delete</mat-icon></button>
       </td>
     </ng-container>
 

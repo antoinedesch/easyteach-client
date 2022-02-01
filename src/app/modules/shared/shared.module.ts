@@ -15,34 +15,32 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {StopPropagationDirective} from "../../directives/stop-propagation.directive";
+import {ConfirmationModalComponent} from "../../components/modal/confirmation-modal/confirmation-modal.component";
 
 const COMPONENTS: Type<any>[] = [
-
+  ConfirmationModalComponent
 ]
 
 const DIRECTIVES: Type<any>[] = [
-    StopPropagationDirective
+  StopPropagationDirective
 ]
 
-const PIPES: Type<any>[] = [
-
-
-]
+const PIPES: Type<any>[] = []
 
 const MODULES: Type<any>[] = [
   MatSidenavModule, MatToolbarModule, MatIconModule, MatDividerModule, CommonModule,
   MatButtonModule, MatButtonModule,
   MatIconModule,
   MatFormFieldModule, MatTableModule, MatPaginatorModule, MatInputModule, MatSortModule,
-  FormsModule,MatDialogModule,MatDatepickerModule,MatNativeDateModule
+  FormsModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS,...DIRECTIVES,...PIPES],
+  declarations: [...COMPONENTS, ...DIRECTIVES, ...PIPES],
   imports: [
     ...MODULES
   ],
-  exports: [...MODULES,...COMPONENTS,...DIRECTIVES,...PIPES],
+  exports: [...MODULES, ...COMPONENTS, ...DIRECTIVES, ...PIPES],
   providers: [DatePipe]
 })
 export class SharedModule {

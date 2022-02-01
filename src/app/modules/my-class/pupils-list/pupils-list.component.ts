@@ -6,6 +6,10 @@ import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {AddPupilModalComponent} from "../../../components/modal/add-pupil-modal/add-pupil-modal.component";
+import {
+  ConfirmationModalComponent,
+  ConfirmDialogModel
+} from "../../../components/modal/confirmation-modal/confirmation-modal.component";
 
 @Component({
   selector: 'app-my-class',
@@ -56,11 +60,27 @@ export class PupilsListComponent implements OnInit {
     });
   }
 
+  deletePupilConfirmation(id:number, index:number) {
+    let pupil = this.dataSource.data[index];
+    const message = `Etes-vous sur de vouloir supprimer l'élève ${pupil.surname.toUpperCase()} ${pupil.firstName} ?`;
+    const dialogData = new ConfirmDialogModel("Confirmation", message);
+
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if ( result ) {
+        this.deletePupil(id,index);
+      }
+    });
+  }
+
   deletePupil(id:number, index:number) {
     this.pupilHttpService.deletePupil(id).subscribe(() =>{
       this.dataSource.data.splice(index, 1);
       this.dataSource._updateChangeSubscription();
     })
-
   }
 }
