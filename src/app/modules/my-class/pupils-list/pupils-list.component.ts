@@ -1,26 +1,24 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {PupilHttpServiceService} from "../../service/pupil-http-service.service";
-import {Pupil} from "../../models/pupil";
+import {PupilHttpServiceService} from "../../../service/pupil-http-service.service";
+import {Pupil} from "../../../models/pupil";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
-import {AddPupilModalComponent} from "../../components/modal/add-pupil-modal/add-pupil-modal.component";
+import {AddPupilModalComponent} from "../../../components/modal/add-pupil-modal/add-pupil-modal.component";
 
 @Component({
   selector: 'app-my-class',
-  templateUrl: './my-class.component.html',
-  styleUrls: ['./my-class.component.scss']
+  templateUrl: './pupils-list.component.html',
+  styleUrls: ['./pupils-list.component.scss']
 })
-export class MyClassComponent implements OnInit {
+export class PupilsListComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'firstName', 'surname', 'birthDate', 'actions'];
   dataSource: MatTableDataSource<Pupil>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  pupils: Pupil[];
 
   constructor(private pupilHttpService: PupilHttpServiceService, public dialog: MatDialog) {
   }
@@ -49,10 +47,12 @@ export class MyClassComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(pupil => {
-      this.pupilHttpService.createPupil(pupil).subscribe(pupil => {
-        this.dataSource.data.push(pupil);
-        this.dataSource._updateChangeSubscription()
-      })
+      if (pupil) {
+        this.pupilHttpService.createPupil(pupil).subscribe(pupil => {
+          this.dataSource.data.push(pupil);
+          this.dataSource._updateChangeSubscription()
+        })
+      }
     });
   }
 

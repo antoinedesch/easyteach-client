@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MyClassComponent } from './my-class.component';
+import { PupilFileComponent } from './pupil-file.component';
 
-describe('MyClassComponent', () => {
-  let component: MyClassComponent;
-  let fixture: ComponentFixture<MyClassComponent>;
+describe('PupilFileComponent', () => {
+  let component: PupilFileComponent;
+  let fixture: ComponentFixture<PupilFileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MyClassComponent ]
+      declarations: [ PupilFileComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyClassComponent);
+    fixture = TestBed.createComponent(PupilFileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,11 +1,15 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {MyClassComponent} from "./my-class.component";
+import {PupilsListComponent} from "./pupils-list/pupils-list.component";
+import {PupilFileComponent} from "./pupil-file/pupil-file.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: MyClassComponent
+    component: PupilsListComponent
+  },{
+    path: 'pupil/:id',
+    component: PupilFileComponent
   }
 ]
 

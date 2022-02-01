@@ -22,4 +22,8 @@ export class AddPupilModalComponent {
     this.dialogRef.close();
   }
 
+  isSaveDisable() {
+    return this.pupil.surname == null || this.pupil.firstName == null;
+  }
+
 }
