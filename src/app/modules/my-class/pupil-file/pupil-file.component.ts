@@ -18,11 +18,15 @@ export interface SubjectTableData {
 })
 export class PupilFileComponent implements OnInit {
 
-  displayedColumns: string[] = ['subject', 'skills','linkedSkills'];
+  displayedColumns: string[] = ['subject', 'skills'];
   dataSource: MatTableDataSource<SubjectTableData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+  ROWSPANDATA = {} as any;
+
+  DATA = [] as any;
 
   constructor(private skillHttpService: SkillHttpServiceService) {
   }
@@ -42,7 +46,18 @@ export class PupilFileComponent implements OnInit {
     this.skillHttpService.getAllSkills().subscribe((skills) => {
       this.skills = skills;
       let datas = Object.values(Subject).map(subject => this.createSkillTableData(subject));
-      this.dataSource = new MatTableDataSource(datas);
+      datas.forEach(row => {
+        this.ROWSPANDATA[row.subject] = row.skills.length
+        row.skills.forEach((desc, index) => {
+          if (index === 0) {
+            this.DATA.push({subject: row.subject, skill:
+              desc, linkedSkills: desc.linkedSkills});
+          } else {
+            this.DATA.push({skill: desc})
+          }
+        })
+      })
+      this.dataSource = new MatTableDataSource(this.DATA);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
@@ -55,4 +70,9 @@ export class PupilFileComponent implements OnInit {
     }
   };
 
+}
+
+export class RowspanDataSubject {
+  subjectRowspan:number;
+  skillsRownspan:number;
 }
