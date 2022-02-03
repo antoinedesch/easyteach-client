@@ -45,7 +45,7 @@ export class PupilFileComponent implements OnInit {
   }
 
   calculateRowSpanSubject(skills:Skill[]):number {
-    let res = 0;
+    let res = 1;
     skills.forEach((skill) => {
       res += skill.linkedSkills.length;
     })
