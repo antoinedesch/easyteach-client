@@ -18,13 +18,15 @@ export interface SubjectTableData {
 })
 export class PupilFileComponent implements OnInit {
 
-  displayedColumns: string[] = ['subject', 'skills'];
+  displayedColumns: string[] = ['subject', 'skills','linkedSkills'];
   dataSource: MatTableDataSource<SubjectTableData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  ROWSPANDATA = {} as any;
+  rowspandatasubject = {} as any;
+
+  rowspandatasskill = {} as any;
 
   DATA = [] as any;
 
@@ -42,19 +44,33 @@ export class PupilFileComponent implements OnInit {
     }
   }
 
+  calculateRowSpanSubject(skills:Skill[]):number {
+    let res = 0;
+    skills.forEach((skill) => {
+      res += skill.linkedSkills.length;
+    })
+    return res;
+  }
+
   ngOnInit(): void {
     this.skillHttpService.getAllSkills().subscribe((skills) => {
       this.skills = skills;
       let datas = Object.values(Subject).map(subject => this.createSkillTableData(subject));
       datas.forEach(row => {
-        this.ROWSPANDATA[row.subject] = row.skills.length
-        row.skills.forEach((desc, index) => {
-          if (index === 0) {
-            this.DATA.push({subject: row.subject, skill:
-              desc, linkedSkills: desc.linkedSkills});
-          } else {
-            this.DATA.push({skill: desc})
+        this.rowspandatasubject[row.subject] = this.calculateRowSpanSubject(row.skills);
+        row.skills.forEach((skill, index_skill) => {
+          if (index_skill === 0) {
+            this.DATA.push({subject: row.subject});
           }
+          this.rowspandatasskill[skill.id] = skill.linkedSkills.length;
+          skill.linkedSkills.forEach((linkedSkill,index_linkedskill) => {
+            if (index_linkedskill === 0) {
+              this.DATA.push({skill:
+                skill, linkedSkill: linkedSkill});
+            } else {
+              this.DATA.push({linkedSkill: linkedSkill})
+            }
+          })
         })
       })
       this.dataSource = new MatTableDataSource(this.DATA);

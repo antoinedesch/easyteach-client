@@ -9,18 +9,29 @@
     <ng-container matColumnDef="subject">
       <th mat-header-cell *matHeaderCellDef> Matières</th>
       <ng-container *matCellDef="let data">
-        <td mat-cell *ngIf="data.subject" [attr.rowspan]="ROWSPANDATA[data.subject]">
+        <td mat-cell *ngIf="data.subject" [attr.rowspan]="rowspandatasubject[data.subject]">
           {{ data.subject }}
         </td>
       </ng-container>
     </ng-container>
 
-
     <ng-container matColumnDef="skills">
-      <th mat-header-cell *matHeaderCellDef>Compétences associées</th>
-      <td mat-cell *matCellDef="let data"> {{ data.skill.name }} </td>
+      <th mat-header-cell *matHeaderCellDef> Compétences </th>
+      <ng-container *matCellDef="let data">
+        <td mat-cell *ngIf="data.skill" [attr.rowspan]="rowspandatasskill[data.skill.id]">
+          {{ data.skill.name }}
+        </td>
+      </ng-container>
     </ng-container>
 
+    <ng-container matColumnDef="linkedSkills">
+      <th mat-header-cell *matHeaderCellDef> Compétences associées </th>
+      <ng-container *matCellDef="let data">
+        <td mat-cell *ngIf="data.linkedSkill" >
+          {{ data.linkedSkill.name }}
+        </td>
+      </ng-container>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
