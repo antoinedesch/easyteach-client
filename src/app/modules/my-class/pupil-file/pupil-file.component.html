@@ -1,8 +1,3 @@
-<mat-form-field appearance="standard">
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-</mat-form-field>
-
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
 
@@ -10,7 +5,7 @@
       <th mat-header-cell *matHeaderCellDef> Matières</th>
       <ng-container *matCellDef="let data">
         <td mat-cell *ngIf="data.subject" [attr.rowspan]="rowspandatasubject[data.subject]">
-          {{ data.subject }}
+          {{ getSubjectName(data.subject) }}
         </td>
       </ng-container>
     </ng-container>
@@ -33,9 +28,17 @@
       </ng-container>
     </ng-container>
 
+    <ng-container matColumnDef="evaluation">
+      <th mat-header-cell *matHeaderCellDef> Evaluation </th>
+      <ng-container *matCellDef="let data">
+        <td mat-cell *ngIf="data.linkedSkill" >
+
+        </td>
+      </ng-container>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSize]="50" [pageSizeOptions]="[5, 10, 25,50, 100]" aria-label="Select page of users"></mat-paginator>
 
 </div>

@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {SkillHttpServiceService} from "../../../service/skill-http-service.service";
 import {Skill} from "../../../models/skill";
 import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {Subject} from "../../../models/enums/Subject";
 
@@ -18,10 +17,9 @@ export interface SubjectTableData {
 })
 export class PupilFileComponent implements OnInit {
 
-  displayedColumns: string[] = ['subject', 'skills','linkedSkills'];
+  displayedColumns: string[] = ['subject', 'skills','linkedSkills','evaluation'];
   dataSource: MatTableDataSource<SubjectTableData>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   rowspandatasubject = {} as any;
@@ -35,14 +33,6 @@ export class PupilFileComponent implements OnInit {
 
   skills: Skill[];
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
 
   ngOnInit(): void {
     this.skillHttpService.getAllSkills().subscribe((skills) => {
@@ -66,7 +56,6 @@ export class PupilFileComponent implements OnInit {
         })
       })
       this.dataSource = new MatTableDataSource(this.DATA);
-      this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
   }
@@ -78,6 +67,16 @@ export class PupilFileComponent implements OnInit {
     }
   };
 
+  getSubjectName(subject: string):string{
+    switch (subject) {
+      case Subject.FRENCH.valueOf():
+        return "Français";
+      case Subject.MATHEMATICS.valueOf():
+        return "Mathématiques";
+      default:
+        return "Matière inconnue";
+    }
+  }
 }
 
 export class RowspanDataSubject {
