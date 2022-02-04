@@ -44,20 +44,12 @@ export class PupilFileComponent implements OnInit {
     }
   }
 
-  calculateRowSpanSubject(skills:Skill[]):number {
-    let res = 1;
-    skills.forEach((skill) => {
-      res += skill.linkedSkills.length;
-    })
-    return res;
-  }
-
   ngOnInit(): void {
     this.skillHttpService.getAllSkills().subscribe((skills) => {
       this.skills = skills;
       let datas = Object.values(Subject).map(subject => this.createSkillTableData(subject));
       datas.forEach(row => {
-        this.rowspandatasubject[row.subject] = this.calculateRowSpanSubject(row.skills);
+        this.rowspandatasubject[row.subject] = row.skills.reduce((acc,skill) => acc + skill.linkedSkills.length, 1);
         row.skills.forEach((skill, index_skill) => {
           if (index_skill === 0) {
             this.DATA.push({subject: row.subject});
