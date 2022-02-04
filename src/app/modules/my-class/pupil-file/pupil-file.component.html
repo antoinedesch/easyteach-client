@@ -1,11 +1,11 @@
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
+  <table border="1" mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
 
     <ng-container matColumnDef="subject">
       <th mat-header-cell *matHeaderCellDef> Matières</th>
       <ng-container *matCellDef="let data">
         <td mat-cell *ngIf="data.subject" [attr.rowspan]="rowspandatasubject[data.subject]">
-          {{ getSubjectName(data.subject) }}
+          <span>{{ getSubjectName(data.subject) }}</span>
         </td>
       </ng-container>
     </ng-container>
@@ -13,8 +13,8 @@
     <ng-container matColumnDef="skills">
       <th mat-header-cell *matHeaderCellDef> Compétences </th>
       <ng-container *matCellDef="let data">
-        <td mat-cell *ngIf="data.skill" [attr.rowspan]="rowspandatasskill[data.skill.id]">
-          {{ data.skill.name }}
+        <td style="text-align: center" mat-cell *ngIf="data.skill" [attr.rowspan]="rowspandatasskill[data.skill.id]">
+          <span>{{ data.skill.name }} </span>
         </td>
       </ng-container>
     </ng-container>
@@ -23,7 +23,7 @@
       <th mat-header-cell *matHeaderCellDef> Compétences associées </th>
       <ng-container *matCellDef="let data">
         <td mat-cell *ngIf="data.linkedSkill" >
-          {{ data.linkedSkill.name }}
+          <span>{{ data.linkedSkill.name }} </span>
         </td>
       </ng-container>
     </ng-container>
@@ -32,7 +32,6 @@
       <th mat-header-cell *matHeaderCellDef> Evaluations Compétences associées</th>
       <ng-container *matCellDef="let data">
         <td mat-cell *ngIf="data.linkedSkill">
-
         </td>
       </ng-container>
     </ng-container>
@@ -41,7 +40,7 @@
       <th mat-header-cell *matHeaderCellDef> Evaluations compétences</th>
       <ng-container *matCellDef="let data">
         <td mat-cell *ngIf="data.evaluationSkill" [attr.rowspan]="rowspandatasskill[data.evaluationSkill.id]">
-          {{ getEvaluationValue(data.evaluationSkill)}}
+          <span>{{ getEvaluationValue(data.evaluationSkill)}} </span>
         </td>
       </ng-container>
     </ng-container>

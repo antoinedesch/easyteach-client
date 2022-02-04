@@ -78,7 +78,7 @@ export class PupilFileComponent implements OnInit {
         return 'EN COURS D\'ACQUISITION';
       case EvaluationValue.NON_ACQUIRED:
         return 'NON ACQUIS';
-      case EvaluationValue.ASBENT:
+      case EvaluationValue.ABSENT:
         return 'ABSENT';
     }
   }
