@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {PupilHttpServiceService} from "../../../service/pupil-http-service.service";
+import {PupilHttpService} from "../../../service/pupil-http.service";
 import {Pupil} from "../../../models/pupil";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
@@ -24,7 +24,7 @@ export class PupilsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private pupilHttpService: PupilHttpServiceService, public dialog: MatDialog) {
+  constructor(private pupilHttpService: PupilHttpService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {

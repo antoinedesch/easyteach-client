@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {delay} from "rxjs";
-import {UserHttpServiceService} from "./service/user-http-service.service";
+import {UserHttpService} from "./service/user-http.service";
 import {User} from "./models/user";
 
 @Component({
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 
   user: User;
 
-  constructor(private observer: BreakpointObserver, private userHttpService: UserHttpServiceService) {
+  constructor(private observer: BreakpointObserver, private userHttpService: UserHttpService) {
   }
 
 

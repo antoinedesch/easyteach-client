@@ -1,4 +1,4 @@
-import {Subject} from "./enums/Subject";
+import {Subject} from "./enums/subject";
 import {LinkedSkill} from "./linked-skill";
 import {GenericModel} from "./generic-model";
 

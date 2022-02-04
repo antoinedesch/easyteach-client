@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class SkillHttpServiceService {
+export class SkillHttpService {
   constructor(
     protected httpClient: HttpClient) {
   }

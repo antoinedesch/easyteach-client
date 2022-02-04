@@ -28,11 +28,20 @@
       </ng-container>
     </ng-container>
 
-    <ng-container matColumnDef="evaluation">
-      <th mat-header-cell *matHeaderCellDef> Evaluation </th>
+    <ng-container matColumnDef="evaluationLinkedSkill">
+      <th mat-header-cell *matHeaderCellDef> Evaluations Compétences associées</th>
       <ng-container *matCellDef="let data">
-        <td mat-cell *ngIf="data.linkedSkill" >
+        <td mat-cell *ngIf="data.linkedSkill">
 
+        </td>
+      </ng-container>
+    </ng-container>
+
+    <ng-container matColumnDef="evaluation">
+      <th mat-header-cell *matHeaderCellDef> Evaluations compétences</th>
+      <ng-container *matCellDef="let data">
+        <td mat-cell *ngIf="data.evaluationSkill" [attr.rowspan]="rowspandatasskill[data.evaluationSkill.id]">
+          {{ getEvaluationValue(data.evaluationSkill)}}
         </td>
       </ng-container>
     </ng-container>
