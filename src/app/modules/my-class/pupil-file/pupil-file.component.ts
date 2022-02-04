@@ -91,7 +91,7 @@ export class PupilFileComponent implements OnInit {
   createSkillTableData(subject: string): SubjectTableData {
     return {
       subject: subject,
-      skills: this.skills.filter((skill) => skill.subject.valueOf() === subject)
+      skills: this.skills.filter((skill) => skill.objective.subject.valueOf() === subject)
     }
   };
 
