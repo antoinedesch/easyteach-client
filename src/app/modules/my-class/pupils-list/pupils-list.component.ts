@@ -60,7 +60,8 @@ export class PupilsListComponent implements OnInit {
     });
   }
 
-  deletePupilConfirmation(id:number, index:number) {
+  deletePupilConfirmation(id:number) {
+    let index = this.dataSource.data.map(e => e.id).indexOf(id);
     let pupil = this.dataSource.data[index];
     const message = `Etes-vous sur de vouloir supprimer l'élève ${pupil.surname.toUpperCase()} ${pupil.firstName} ?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);

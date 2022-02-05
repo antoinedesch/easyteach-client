@@ -14,6 +14,10 @@ const routes: Routes = [
         path: 'home',
         loadChildren: (): Type<any> | NgModuleFactory<any> | Observable<Type<any>> | Promise<any> => import('./modules/home/home.module').then((module) => module.HomeModule)
       },
+      {
+        path: 'my-exercises',
+        loadChildren: (): Type<any> | NgModuleFactory<any> | Observable<Type<any>> | Promise<any> => import('./modules/my-exercises/my-exercises.module').then((module) => module.MyExercisesModule)
+      },
     ]
   }
 ];
