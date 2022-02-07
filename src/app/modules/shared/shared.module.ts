@@ -16,6 +16,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {StopPropagationDirective} from "../../directives/stop-propagation.directive";
 import {ConfirmationModalComponent} from "../../components/modal/confirmation-modal/confirmation-modal.component";
+import {nl2brPipe} from "../../pipe/nl2brPipe";
 
 const COMPONENTS: Type<any>[] = [
   ConfirmationModalComponent
@@ -25,7 +26,9 @@ const DIRECTIVES: Type<any>[] = [
   StopPropagationDirective
 ]
 
-const PIPES: Type<any>[] = []
+const PIPES: Type<any>[] = [
+  nl2brPipe
+]
 
 const MODULES: Type<any>[] = [
   MatSidenavModule, MatToolbarModule, MatIconModule, MatDividerModule, CommonModule,

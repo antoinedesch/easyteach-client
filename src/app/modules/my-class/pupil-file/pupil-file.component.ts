@@ -105,9 +105,5 @@ export class PupilFileComponent implements OnInit {
         return "Matière inconnue";
     }
   }
-}
 
-export class RowspanDataSubject {
-  subjectRowspan:number;
-  skillsRownspan:number;
 }

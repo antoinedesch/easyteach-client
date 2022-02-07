@@ -23,7 +23,7 @@
       <th mat-header-cell *matHeaderCellDef> Compétences associées </th>
       <ng-container *matCellDef="let data">
         <td mat-cell *ngIf="data.linkedSkill" >
-          <span>{{ data.linkedSkill.name }} </span>
+          <div [innerHTML]="data.linkedSkill.name | nl2br"></div>
         </td>
       </ng-container>
     </ng-container>

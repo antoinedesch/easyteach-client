@@ -1,6 +1,7 @@
 import {Pupil} from "./pupil";
 import {Skill} from "./skill";
 import {EvaluationValue} from "./enums/evaluation-value";
+import {Exercise} from "./exercise";
 
 export class Evaluation {
   pupil: Pupil;
@@ -9,5 +10,8 @@ export class Evaluation {
 
   value: EvaluationValue;
 
+  exercise:Exercise;
+
+  score:number;
 
 }

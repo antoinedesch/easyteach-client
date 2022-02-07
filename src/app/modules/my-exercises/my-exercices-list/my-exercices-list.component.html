@@ -28,7 +28,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row [routerLink]="['pupil/', row.id]" *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row (click)="onClickExercise(row.id)" *matRowDef="let row; columns: displayedColumns;"></tr>
 
   </table>
 

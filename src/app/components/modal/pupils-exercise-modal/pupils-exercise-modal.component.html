@@ -1,0 +1,30 @@
+<div class="mat-elevation-z8">
+  <table border="1" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef> Prénom</th>
+      <td *matCellDef="let data">
+        {{ data.pupil.firstName}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="surname">
+      <th mat-header-cell *matHeaderCellDef> Nom</th>
+      <td *matCellDef="let data">
+        {{ data.pupil.surname}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="evaluation">
+      <th mat-header-cell *matHeaderCellDef> Evaluation</th>
+      <td *matCellDef="let data">
+        <input [(ngModel)]="data.evaluation.score" placeholder="Pas de note" type="number" min="0" max="100"/>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
