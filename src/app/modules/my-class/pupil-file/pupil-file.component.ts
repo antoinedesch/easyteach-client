@@ -84,7 +84,7 @@ export class PupilFileComponent implements OnInit {
   }
 
   getEvaluationValue(skill:Skill): string {
-    let evaluation:Evaluation = this.evaluations.filter((evaluation) => evaluation.skill.id === skill.id)[0];
+    let evaluation:Evaluation = this.evaluations.filter((evaluation) => evaluation.skill && evaluation.skill.id === skill.id)[0];
     return evaluation ? this.getEvaluationValueString(evaluation.value) : ""
   }
 
