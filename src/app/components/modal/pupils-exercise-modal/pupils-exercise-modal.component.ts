@@ -8,6 +8,7 @@ import {EvaluationPupil} from "../../../models/evaluation-pupil";
 import {Evaluation} from "../../../models/evaluation";
 import {debounceTime, distinctUntilChanged, Subject} from "rxjs";
 import {MatSliderChange} from "@angular/material/slider";
+import {EvaluationType} from "../../../models/enums/evaluation-type";
 
 
 @Component({
@@ -57,6 +58,7 @@ export class PupilsExerciseModalComponent implements OnInit {
       evaluationPupil.evaluation.score = event.value;
       evaluationPupil.evaluation.pupil = evaluationPupil.pupil;
       evaluationPupil.evaluation.exercise = this.exercise;
+      evaluationPupil.evaluation.evaluationType = EvaluationType.EXERCISE;
       this.evaluationChanged.next(evaluationPupil.evaluation);
     }
   }
