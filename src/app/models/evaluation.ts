@@ -14,4 +14,8 @@ export class Evaluation {
 
   score:number;
 
+  constructor() {
+    this.score = 0;
+  }
+
 }

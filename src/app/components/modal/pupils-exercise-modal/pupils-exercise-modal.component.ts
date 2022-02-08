@@ -1,13 +1,14 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Exercise} from "../../../models/exercise";
-import {ExerciceHttpService} from "../../../service/exercice-http.service";
 import {EvaluationHttpService} from "../../../service/evaluation-http.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
-import {SubjectTableData} from "../../../modules/my-class/pupil-file/pupil-file.component";
 import {EvaluationPupil} from "../../../models/evaluation-pupil";
 import {Evaluation} from "../../../models/evaluation";
+import {debounceTime, distinctUntilChanged, Subject} from "rxjs";
+import {MatSliderChange} from "@angular/material/slider";
+
 
 @Component({
   selector: 'app-pupils-exercise',
@@ -16,20 +17,28 @@ import {Evaluation} from "../../../models/evaluation";
 })
 export class PupilsExerciseModalComponent implements OnInit {
 
-  displayedColumns: string[] = ['surname', 'firstname','evaluation'];
+  evaluationChanged: Subject<Evaluation> = new Subject<Evaluation>();
+
+  displayedColumns: string[] = ['surname', 'firstname', 'evaluation'];
   dataSource: MatTableDataSource<EvaluationPupil>;
 
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(public dialogRef: MatDialogRef<PupilsExerciseModalComponent>,
               @Inject(MAT_DIALOG_DATA) public exercise: Exercise,
-              private evaluationHttpService:EvaluationHttpService) {
+              private evaluationHttpService: EvaluationHttpService) {
+
+    this.evaluationChanged.pipe(
+      debounceTime(300),
+      distinctUntilChanged())
+      .subscribe(evaluation => this.sendEvaluation(evaluation)
+      );
   }
 
   ngOnInit(): void {
     this.evaluationHttpService.getAllEvaluationByExerciseId(this.exercise.id).subscribe((evaluationsPupil) => {
       evaluationsPupil.forEach((e) => {
-        if ( e.evaluation == null) {
+        if (e.evaluation == null) {
           e.evaluation = new Evaluation();
         }
       })
@@ -39,16 +48,29 @@ export class PupilsExerciseModalComponent implements OnInit {
 
   }
 
-  formatLabel(value:number):string {
-    if ( value < 25 ) {
+  sendEvaluation(evaluation: Evaluation): void {
+    this.evaluationHttpService.addEvaluation(evaluation).subscribe();
+  }
+
+  onEvaluationSlide(evaluationPupil: EvaluationPupil,event: MatSliderChange) {
+    if (event.value != null) {
+      evaluationPupil.evaluation.score = event.value;
+      evaluationPupil.evaluation.pupil = evaluationPupil.pupil;
+      evaluationPupil.evaluation.exercise = this.exercise;
+      this.evaluationChanged.next(evaluationPupil.evaluation);
+    }
+  }
+
+  formatLabel(value: number): string {
+    if (value < 25) {
       return "Faible"
-    } else if ( value < 50) {
+    } else if (value < 50) {
       return "Moyen"
-    } else if ( value < 75) {
+    } else if (value < 75) {
       return "Bon"
-    } else if ( value < 90) {
+    } else if (value < 90) {
       return "Très bien"
-    } else if ( value < 100) {
+    } else if (value < 100) {
       return "Excellent"
     } else {
       return "Parfait";

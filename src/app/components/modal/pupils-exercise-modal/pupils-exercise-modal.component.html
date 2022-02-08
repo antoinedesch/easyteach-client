@@ -19,6 +19,8 @@
       <th mat-header-cell *matHeaderCellDef> Evaluation</th>
       <td *matCellDef="let data">
         <mat-slider
+          (input)="onEvaluationSlide(data,$event)"
+          [(ngModel)]="data.evaluation.score"
           class="width-100"
           thumbLabel
           [displayWith]="formatLabel"
