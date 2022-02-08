@@ -39,4 +39,21 @@ export class PupilsExerciseModalComponent implements OnInit {
 
   }
 
+  formatLabel(value:number):string {
+    if ( value < 25 ) {
+      return "Faible"
+    } else if ( value < 50) {
+      return "Moyen"
+    } else if ( value < 75) {
+      return "Bon"
+    } else if ( value < 90) {
+      return "Très bien"
+    } else if ( value < 100) {
+      return "Excellent"
+    } else {
+      return "Parfait";
+    }
+  }
+
+
 }

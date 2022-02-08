@@ -18,7 +18,15 @@
     <ng-container matColumnDef="evaluation">
       <th mat-header-cell *matHeaderCellDef> Evaluation</th>
       <td *matCellDef="let data">
-        <input [(ngModel)]="data.evaluation.score" placeholder="Pas de note" type="number" min="0" max="100"/>
+        <mat-slider
+          class="width-100"
+          thumbLabel
+          [displayWith]="formatLabel"
+          tickInterval="1000"
+          step="1"
+          min="0"
+          max="100"
+          aria-label="units"></mat-slider>
       </td>
     </ng-container>
 

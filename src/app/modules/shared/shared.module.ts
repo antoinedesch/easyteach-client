@@ -17,6 +17,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {StopPropagationDirective} from "../../directives/stop-propagation.directive";
 import {ConfirmationModalComponent} from "../../components/modal/confirmation-modal/confirmation-modal.component";
 import {nl2brPipe} from "../../pipe/nl2brPipe";
+import {MatSliderModule} from "@angular/material/slider";
 
 const COMPONENTS: Type<any>[] = [
   ConfirmationModalComponent
@@ -35,7 +36,7 @@ const MODULES: Type<any>[] = [
   MatButtonModule, MatButtonModule,
   MatIconModule,
   MatFormFieldModule, MatTableModule, MatPaginatorModule, MatInputModule, MatSortModule,
-  FormsModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule
+  FormsModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatSliderModule
 ]
 
 @NgModule({
