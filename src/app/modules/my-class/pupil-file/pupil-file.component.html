@@ -10,6 +10,15 @@
       </ng-container>
     </ng-container>
 
+    <ng-container matColumnDef="objectives">
+      <th mat-header-cell *matHeaderCellDef> Objectives</th>
+      <ng-container *matCellDef="let data">
+        <td mat-cell *ngIf="data.objective" [attr.rowspan]="rowspandataobjective[data.objective]">
+          <span>{{ getObjectiveName(data.objective) }}</span>
+        </td>
+      </ng-container>
+    </ng-container>
+
     <ng-container matColumnDef="skills">
       <th mat-header-cell *matHeaderCellDef> Compétences </th>
       <ng-container *matCellDef="let data">
@@ -39,8 +48,8 @@
     <ng-container matColumnDef="evaluation">
       <th mat-header-cell *matHeaderCellDef> Evaluations compétences</th>
       <ng-container *matCellDef="let data">
-        <td mat-cell *ngIf="data.evaluationSkill" [attr.rowspan]="rowspandatasskill[data.evaluationSkill.id]">
-          <span>{{ getEvaluationValue(data.evaluationSkill)}} </span>
+        <td mat-cell *ngIf="data.evaluationSkill " [attr.rowspan]="rowspandatasskill[data.evaluationSkill.id]">
+          <span>{{ data.evaluationSkill.value}} </span>
         </td>
       </ng-container>
     </ng-container>
