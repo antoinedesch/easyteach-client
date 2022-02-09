@@ -21,9 +21,10 @@
       <td mat-cell *matCellDef="let row"> {{row.date | date: 'dd/MM/yyyy'}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <ng-container matColumnDef="linkedskills">
+      <th mat-header-cell *matHeaderCellDef> Compétences associées </th>
       <td mat-cell *matCellDef="let row;" >
+        <span> {{ getAllLinkedSkills(row.linkedSkills)}}</span>
       </td>
     </ng-container>
 

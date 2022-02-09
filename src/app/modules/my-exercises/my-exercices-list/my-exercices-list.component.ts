@@ -4,9 +4,11 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {Exercise} from "../../../models/exercise";
-import {ConfirmationModalComponent} from "../../../components/modal/confirmation-modal/confirmation-modal.component";
 import {MatDialog} from "@angular/material/dialog";
-import {PupilsExerciseModalComponent} from "../../../components/modal/pupils-exercise-modal/pupils-exercise-modal.component";
+import {
+  PupilsExerciseModalComponent
+} from "../../../components/modal/pupils-exercise-modal/pupils-exercise-modal.component";
+import {LinkedSkill} from "../../../models/linked-skill";
 
 @Component({
   selector: 'app-my-exercices-list',
@@ -15,7 +17,7 @@ import {PupilsExerciseModalComponent} from "../../../components/modal/pupils-exe
 })
 export class MyExercicesListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id','name','date','actions'];
+  displayedColumns: string[] = ['id','name','date','linkedskills'];
   dataSource: MatTableDataSource<Exercise>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -44,4 +46,7 @@ export class MyExercicesListComponent implements OnInit {
     });
   }
 
+  getAllLinkedSkills(linkedSkills: LinkedSkill[]) {
+    return linkedSkills.map(linkedSkill => linkedSkill.name).join(',');
+  }
 }

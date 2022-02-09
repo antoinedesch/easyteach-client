@@ -41,7 +41,17 @@
       <th mat-header-cell *matHeaderCellDef> Evaluations compétences associées</th>
       <ng-container *matCellDef="let data">
         <td mat-cell *ngIf="data.linkedSkill">
-          {{ data.linkedSkill?.evaluationScore }}
+          <mat-slider
+            *ngIf="data.linkedSkill?.evaluationScore != null"
+            [(ngModel)]="data.linkedSkill.evaluationScore"
+            class="width-100"
+            thumbLabel
+            disabled="true"
+            tickInterval="1000"
+            step="1"
+            min="0"
+            max="100"
+            aria-label="units"></mat-slider>
         </td>
       </ng-container>
     </ng-container>
