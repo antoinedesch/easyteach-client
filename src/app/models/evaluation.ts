@@ -3,11 +3,14 @@ import {Skill} from "./skill";
 import {EvaluationValue} from "./enums/evaluation-value";
 import {Exercise} from "./exercise";
 import {EvaluationType} from "./enums/evaluation-type";
+import {LinkedSkill} from "./linked-skill";
 
 export class Evaluation {
   pupil: Pupil;
 
   skill: Skill;
+
+  linkedSkill: LinkedSkill;
 
   value: EvaluationValue;
 

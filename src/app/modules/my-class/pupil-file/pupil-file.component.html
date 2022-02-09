@@ -38,9 +38,10 @@
     </ng-container>
 
     <ng-container matColumnDef="evaluationLinkedSkill">
-      <th mat-header-cell *matHeaderCellDef> Evaluations Compétences associées</th>
+      <th mat-header-cell *matHeaderCellDef> Evaluations compétences associées</th>
       <ng-container *matCellDef="let data">
         <td mat-cell *ngIf="data.linkedSkill">
+          {{ data.linkedSkill?.evaluationScore }}
         </td>
       </ng-container>
     </ng-container>

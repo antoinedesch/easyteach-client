@@ -9,6 +9,8 @@ import {Evaluation} from "../../../models/evaluation";
 import {ActivatedRoute} from "@angular/router";
 import {EvaluationValue} from "../../../models/enums/evaluation-value";
 import {Objective} from "../../../models/objective";
+import {LinkedSkill} from "../../../models/linked-skill";
+import {EvaluationType} from "../../../models/enums/evaluation-type";
 
 export interface SubjectTableData {
   subject: string,
@@ -82,7 +84,10 @@ export class PupilFileComponent implements OnInit {
             datas[subject][objectiveId].forEach((skill) => {
               this.rowspandatasskill[skill.id] = skill.linkedSkills.length;
               skill.linkedSkills.forEach((linkedSkill: any, linked_skill:number) => {
-                let d = {linkedSkill: linkedSkill, skill: undefined, evaluationSkill: undefined};
+                let d = {linkedSkill: {
+                    name: linkedSkill.name,
+                    evaluationScore: this.getEvaluationLinkedSkillValue(linkedSkill)
+                  },skill: undefined, evaluationSkill: undefined};
                 if ( linked_skill == 0) {
                   d.skill = skill;
                   // @ts-ignore
@@ -151,5 +156,13 @@ export class PupilFileComponent implements OnInit {
 
   getObjectiveName(objectiveId: number) {
     return this.skills.filter(skill => skill.objective.id == objectiveId)[0].objective.name;
+  }
+
+  getEvaluationLinkedSkillValue(linkedSkill: LinkedSkill): number | null {
+    let pupilEvaluations =  this.evaluations.filter((evaluation) => evaluation.evaluationType == EvaluationType.LINKED_SKILL && evaluation.linkedSkill.id == linkedSkill.id);
+    if ( pupilEvaluations.length > 0) {
+      return pupilEvaluations[0].score;
+    }
+    return null;
   }
 }
