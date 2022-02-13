@@ -30,8 +30,7 @@ export class PupilsExerciseModalComponent implements OnInit {
               private evaluationHttpService: EvaluationHttpService) {
 
     this.evaluationChanged.pipe(
-      debounceTime(300),
-      distinctUntilChanged())
+      debounceTime(1000))
       .subscribe(evaluation => this.sendEvaluation(evaluation)
       );
   }
