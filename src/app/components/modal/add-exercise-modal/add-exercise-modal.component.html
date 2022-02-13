@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Ajout d'un exercice</h1>
+<div mat-dialog-content class="form">
+  <mat-form-field appearance="fill">
+    <mat-label>Nom*</mat-label>
+    <input matInput [(ngModel)]="exercise.name">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input [(ngModel)]="exercise.date" matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Section*</mat-label>
+    <mat-select [(ngModel)]="exercise.section" name="food">
+      <mat-option *ngFor="let section of getAllSections()" [value]="section">
+        {{ section.valueOf() }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label> Compétences associées </mat-label>
+    <mat-select [(ngModel)]="exercise.linkedSkills" multiple>
+      <mat-form-field appearance="fill">
+        <mat-label>Chercher par compétence </mat-label>
+        <input matInput placeholder ="Chercher..." (keyup)="onKey($event.target)">
+      </mat-form-field>
+      <mat-optgroup *ngFor="let skill of skills" [label]="skill.name">
+        <mat-option *ngFor="let linkedSkill of skill.linkedSkills" [value]="linkedSkill">
+          {{linkedSkill.name}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Fermer</button>
+  <button mat-button [disabled]="isSaveDisable()" [mat-dialog-close]="exercise" cdkFocusInitial>Ajouter</button>
+</div>
+
+

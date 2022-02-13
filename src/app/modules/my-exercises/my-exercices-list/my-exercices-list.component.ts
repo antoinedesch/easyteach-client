@@ -9,6 +9,13 @@ import {
   PupilsExerciseModalComponent
 } from "../../../components/modal/pupils-exercise-modal/pupils-exercise-modal.component";
 import {LinkedSkill} from "../../../models/linked-skill";
+import {
+  ConfirmationModalComponent,
+  ConfirmDialogModel
+} from "../../../components/modal/confirmation-modal/confirmation-modal.component";
+import {AddPupilModalComponent} from "../../../components/modal/add-pupil-modal/add-pupil-modal.component";
+import {Pupil} from "../../../models/pupil";
+import {AddExerciseModalComponent} from "../../../components/modal/add-exercise-modal/add-exercise-modal.component";
 
 @Component({
   selector: 'app-my-exercices-list',
@@ -48,5 +55,21 @@ export class MyExercicesListComponent implements OnInit {
 
   getAllLinkedSkills(linkedSkills: LinkedSkill[]) {
     return linkedSkills.map(linkedSkill => linkedSkill.name).join(',');
+  }
+
+  addExercise(): void {
+    const dialogRef = this.dialog.open(AddExerciseModalComponent, {
+      width: '60%',
+      data: new Exercise()
+    });
+
+    dialogRef.afterClosed().subscribe(exercise => {
+      if (exercise) {
+        this.exerciseHttpService.createExercise(exercise).subscribe(exercise => {
+          this.dataSource.data.push(exercise);
+          this.dataSource._updateChangeSubscription()
+        })
+      }
+    });
   }
 }

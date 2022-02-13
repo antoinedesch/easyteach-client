@@ -1,6 +1,7 @@
 import {GenericModel} from "./generic-model";
 import {User} from "./user";
 import {LinkedSkill} from "./linked-skill";
+import {Section} from "./enums/section";
 
 export class Exercise extends GenericModel {
 
@@ -11,5 +12,7 @@ export class Exercise extends GenericModel {
   linkedSkills:LinkedSkill[];
 
   date:Date;
+
+  section: Section;
 
 }

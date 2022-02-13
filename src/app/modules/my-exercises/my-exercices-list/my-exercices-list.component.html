@@ -1,5 +1,6 @@
-
-
+<div>
+  <button mat-raised-button (click)="addExercise()">Ajouter un exercise</button>
+</div>
 <div class="mat-elevation-z8">
   <table mat-table *ngIf="dataSource" [dataSource]="dataSource" matSort>
 
@@ -33,5 +34,5 @@
 
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  <mat-paginator [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
