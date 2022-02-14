@@ -21,7 +21,6 @@ export class PupilsListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'firstName', 'surname', 'birthDate', 'actions'];
   dataSource: MatTableDataSource<Pupil>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private pupilHttpService: PupilHttpService, public dialog: MatDialog) {
@@ -30,7 +29,6 @@ export class PupilsListComponent implements OnInit {
   ngOnInit(): void {
     this.pupilHttpService.getAllPupils().subscribe((pupils) => {
       this.dataSource = new MatTableDataSource(pupils);
-      this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
   }
@@ -38,10 +36,6 @@ export class PupilsListComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
   addPupil() {

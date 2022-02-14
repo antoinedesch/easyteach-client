@@ -4,8 +4,9 @@ import {EvaluationValue} from "./enums/evaluation-value";
 import {Exercise} from "./exercise";
 import {EvaluationType} from "./enums/evaluation-type";
 import {LinkedSkill} from "./linked-skill";
+import {GenericModel} from "./generic-model";
 
-export class Evaluation {
+export class Evaluation extends GenericModel{
   pupil: Pupil;
 
   skill: Skill;
@@ -21,6 +22,7 @@ export class Evaluation {
   evaluationType:EvaluationType;
 
   constructor() {
+    super();
     this.score = 0;
   }
 

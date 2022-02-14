@@ -18,7 +18,7 @@ import {EvaluationType} from "../../../models/enums/evaluation-type";
 })
 export class PupilsExerciseModalComponent implements OnInit {
 
-  evaluationChanged: Subject<Evaluation> = new Subject<Evaluation>();
+  evaluationChangedArray: Subject<Evaluation>[] = [];
 
   displayedColumns: string[] = ['surname', 'firstname', 'evaluation'];
   dataSource: MatTableDataSource<EvaluationPupil>;
@@ -29,18 +29,19 @@ export class PupilsExerciseModalComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public exercise: Exercise,
               private evaluationHttpService: EvaluationHttpService) {
 
-    this.evaluationChanged.pipe(
-      debounceTime(1000))
-      .subscribe(evaluation => this.sendEvaluation(evaluation)
-      );
+
   }
 
   ngOnInit(): void {
+    let subject
     this.evaluationHttpService.getAllEvaluationByExerciseId(this.exercise.id).subscribe((evaluationsPupil) => {
       evaluationsPupil.forEach((e) => {
         if (e.evaluation == null) {
           e.evaluation = new Evaluation();
         }
+        subject = new Subject<Evaluation>();
+        subject.pipe(debounceTime(1000)).subscribe(evaluation => this.sendEvaluation(evaluation));
+        this.evaluationChangedArray.push(subject);
       })
       this.dataSource = new MatTableDataSource(evaluationsPupil);
       this.dataSource.sort = this.sort;
@@ -58,7 +59,8 @@ export class PupilsExerciseModalComponent implements OnInit {
       evaluationPupil.evaluation.pupil = evaluationPupil.pupil;
       evaluationPupil.evaluation.exercise = this.exercise;
       evaluationPupil.evaluation.evaluationType = EvaluationType.EXERCISE;
-      this.evaluationChanged.next(evaluationPupil.evaluation);
+      let index = this.dataSource.data.map(e => e.pupil.id).indexOf(evaluationPupil.pupil.id);
+      this.evaluationChangedArray[index].next(evaluationPupil.evaluation);
     }
   }
 
