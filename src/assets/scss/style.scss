@@ -18,13 +18,22 @@
 
 mat-slider ::ng-deep .mat-slider-wrapper ::ng-deep .mat-slider-track-wrapper {
   background-image: linear-gradient(to right, red,yellow,green);
-  height: 5px;
+  height: 15px;
   border-radius: 20px;
 }
 
 mat-slider ::ng-deep .mat-slider-wrapper ::ng-deep .mat-slider-track-wrapper ::ng-deep .mat-slider-track-fill {
   visibility: hidden;
 }
+
+.mat-accent  ::ng-deep .mat-slider-thumb {
+  height: 50px;
+  width: 30px;
+  border: solid 2px gray;
+  bottom: -30px;
+  right: -15px;
+}
+
 
 mat-slider ::ng-deep .mat-slider-wrapper ::ng-deep .mat-slider-track-wrapper ::ng-deep .mat-slider-track-background {
   visibility: hidden;
