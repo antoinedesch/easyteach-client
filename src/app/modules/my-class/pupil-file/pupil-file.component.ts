@@ -104,7 +104,7 @@ export class PupilFileComponent implements OnInit {
                     name: linkedSkill.name,
                     id: linkedSkill.id,
                     skill: {
-                      id : linkedSkill.skill?.id
+                      id: linkedSkill.skill?.id
                     },
                     evaluationScore: this.getEvaluationLinkedSkillValue(linkedSkill)
                   }, skill: undefined, evaluationSkill: undefined
@@ -152,7 +152,7 @@ export class PupilFileComponent implements OnInit {
   createSkillTableData(): any {
     let res = {} as any;
     this.skills.forEach((skill) => {
-      skill.linkedSkills.push(new LinkedSkill(skill))
+      skill.linkedSkills.push(new LinkedSkill())
       if (!res[skill.objective.subject]) {
         res[skill.objective.subject] = {} as any;
       }
@@ -181,7 +181,7 @@ export class PupilFileComponent implements OnInit {
   }
 
   getEvaluationLinkedSkillValue(linkedSkill: LinkedSkill): number | null {
-    let pupilEvaluations = this.evaluations.filter((evaluation) => evaluation.evaluationType == EvaluationType.LINKED_SKILL && evaluation.linkedSkill.id == linkedSkill.id);
+    let pupilEvaluations = this.evaluations.filter((evaluation) => evaluation.evaluationType == EvaluationType.LINKED_SKILL && (evaluation.linkedSkill.id == linkedSkill.id || (linkedSkill.parent && evaluation.linkedSkill.id == linkedSkill.parent.id)));
     if (pupilEvaluations.length > 0) {
       return pupilEvaluations[0].score;
     }
