@@ -14,14 +14,17 @@ export class EditLinkedSkillComponent {
   constructor(public dialogRef: MatDialogRef<EditLinkedSkillComponent>,
               @Inject(MAT_DIALOG_DATA) linkedSkill: LinkedSkill
   ) {
-    if (linkedSkill.aClass == null) {
-      this.linkedSkill = Object.assign({}, linkedSkill);
-      this.linkedSkill.id = null;
-      this.linkedSkill.parent = linkedSkill;
+    if (linkedSkill.id) {
+      if (linkedSkill.aClass == null) {
+        this.linkedSkill = Object.assign({}, linkedSkill);
+        this.linkedSkill.id = null;
+        this.linkedSkill.parent = linkedSkill;
+      } else {
+        this.linkedSkill = linkedSkill;
+      }
     } else {
       this.linkedSkill = linkedSkill;
     }
-
   }
 
   onNoClick() {

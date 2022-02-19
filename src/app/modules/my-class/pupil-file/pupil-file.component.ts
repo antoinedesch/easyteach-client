@@ -11,8 +11,6 @@ import {EvaluationValue} from "../../../models/enums/evaluation-value";
 import {Objective} from "../../../models/objective";
 import {LinkedSkill} from "../../../models/linked-skill";
 import {EvaluationType} from "../../../models/enums/evaluation-type";
-import {AddPupilModalComponent} from "../../../components/modal/add-pupil-modal/add-pupil-modal.component";
-import {Pupil} from "../../../models/pupil";
 import {MatDialog} from "@angular/material/dialog";
 import {EditLinkedSkillComponent} from "../../../components/modal/edit-linked-skill/edit-linked-skill.component";
 import {LinkedskillHttpService} from "../../../service/linkedskill-http.service";
@@ -60,6 +58,14 @@ export class PupilFileComponent implements OnInit {
 
   evaluations: Evaluation[];
 
+  refreshGrid() {
+    this.rowspandatasubject = {} as any;
+    this.rowspandatasskill = {} as any;
+    this.rowspandataobjective = {} as any;
+    this.DATA = [];
+    this.ngOnInit();
+  }
+
   ngOnInit(): void {
     let pupiId = Number(this.route.snapshot.paramMap.get('id'));
     this.evaluationHttpService.getAllEvaluationByPupilId(pupiId).subscribe((evaluations) => {
@@ -97,6 +103,9 @@ export class PupilFileComponent implements OnInit {
                   linkedSkill: {
                     name: linkedSkill.name,
                     id: linkedSkill.id,
+                    skill: {
+                      id : linkedSkill.skill?.id
+                    },
                     evaluationScore: this.getEvaluationLinkedSkillValue(linkedSkill)
                   }, skill: undefined, evaluationSkill: undefined
                 };
@@ -143,6 +152,7 @@ export class PupilFileComponent implements OnInit {
   createSkillTableData(): any {
     let res = {} as any;
     this.skills.forEach((skill) => {
+      skill.linkedSkills.push(new LinkedSkill(skill))
       if (!res[skill.objective.subject]) {
         res[skill.objective.subject] = {} as any;
       }
@@ -187,7 +197,7 @@ export class PupilFileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(linkedSkill => {
       if (linkedSkill) {
         this.linkedSkillHttpService.saveLinkedSkill(linkedSkill).subscribe((linkedSkill) => {
-          console.log(linkedSkill);
+          this.refreshGrid();
         })
       }
     });

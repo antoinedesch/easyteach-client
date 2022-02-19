@@ -31,9 +31,14 @@
     <ng-container matColumnDef="linkedSkills">
       <th mat-header-cell *matHeaderCellDef> Compétences associées </th>
       <ng-container *matCellDef="let data">
-        <td style="padding: 1%"  class="row-centered" mat-cell *ngIf="data.linkedSkill" >
-          <div [innerHTML]="data.linkedSkill.name | nl2br"></div>
-          <button (click)="onEditLinkedSkill(data.linkedSkill)" style="margin: 1%" ><mat-icon>edit</mat-icon></button>
+        <td mat-cell *ngIf="data.linkedSkill" >
+          <div  style="padding: 1%"  class="row-centered" *ngIf="data.linkedSkill.id">
+            <div [innerHTML]="data.linkedSkill.name | nl2br"></div>
+            <button (click)="onEditLinkedSkill(data.linkedSkill)" style="margin: 1%" ><mat-icon>edit</mat-icon></button>
+          </div>
+          <div *ngIf="!data.linkedSkill.id">
+            <button (click)="onEditLinkedSkill(data.linkedSkill)"  mat-button><mat-icon>add</mat-icon> Ajouter </button>
+          </div>
         </td>
       </ng-container>
     </ng-container>
