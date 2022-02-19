@@ -4,7 +4,7 @@
     <ng-container matColumnDef="subject">
       <th mat-header-cell *matHeaderCellDef> Matières</th>
       <ng-container *matCellDef="let data">
-        <td mat-cell *ngIf="data.subject" [attr.rowspan]="rowspandatasubject[data.subject]">
+        <td style="width: 5%;" mat-cell *ngIf="data.subject" [attr.rowspan]="rowspandatasubject[data.subject]">
           <span>{{ getSubjectName(data.subject) }}</span>
         </td>
       </ng-container>
@@ -13,7 +13,7 @@
     <ng-container matColumnDef="objectives">
       <th mat-header-cell *matHeaderCellDef> Objectives</th>
       <ng-container *matCellDef="let data">
-        <td mat-cell *ngIf="data.objective" [attr.rowspan]="rowspandataobjective[data.objective]">
+        <td style="width: 10%;" mat-cell *ngIf="data.objective" [attr.rowspan]="rowspandataobjective[data.objective]">
           <span>{{ getObjectiveName(data.objective) }}</span>
         </td>
       </ng-container>
@@ -22,7 +22,7 @@
     <ng-container matColumnDef="skills">
       <th mat-header-cell *matHeaderCellDef> Compétences </th>
       <ng-container *matCellDef="let data">
-        <td style="text-align: center" mat-cell *ngIf="data.skill" [attr.rowspan]="rowspandatasskill[data.skill.id]">
+        <td style="text-align: center; width: 20%" mat-cell *ngIf="data.skill" [attr.rowspan]="rowspandatasskill[data.skill.id]">
           <span>{{ data.skill.name }} </span>
         </td>
       </ng-container>
@@ -31,8 +31,9 @@
     <ng-container matColumnDef="linkedSkills">
       <th mat-header-cell *matHeaderCellDef> Compétences associées </th>
       <ng-container *matCellDef="let data">
-        <td mat-cell *ngIf="data.linkedSkill" >
+        <td style="padding: 1%"  class="row-centered" mat-cell *ngIf="data.linkedSkill" >
           <div [innerHTML]="data.linkedSkill.name | nl2br"></div>
+          <button (click)="onEditLinkedSkill(data.linkedSkill)" style="margin: 1%" ><mat-icon>edit</mat-icon></button>
         </td>
       </ng-container>
     </ng-container>
@@ -40,7 +41,7 @@
     <ng-container matColumnDef="evaluationLinkedSkill">
       <th mat-header-cell *matHeaderCellDef> Evaluations compétences associées</th>
       <ng-container *matCellDef="let data">
-        <td mat-cell *ngIf="data.linkedSkill">
+        <td style="width: 20%" mat-cell *ngIf="data.linkedSkill">
           <mat-slider
             *ngIf="data.linkedSkill?.evaluationScore != null"
             [(ngModel)]="data.linkedSkill.evaluationScore"
@@ -59,7 +60,7 @@
     <ng-container matColumnDef="evaluation">
       <th mat-header-cell *matHeaderCellDef> Evaluations compétences</th>
       <ng-container *matCellDef="let data">
-        <td mat-cell *ngIf="data.evaluationSkill " [attr.rowspan]="rowspandatasskill[data.evaluationSkill.id]">
+        <td style="width: 5%;"  mat-cell *ngIf="data.evaluationSkill " [attr.rowspan]="rowspandatasskill[data.evaluationSkill.id]">
           <span>{{ data.evaluationSkill.value}} </span>
         </td>
       </ng-container>

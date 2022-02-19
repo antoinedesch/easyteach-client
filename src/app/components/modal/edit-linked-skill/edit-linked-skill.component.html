@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Modification d'une compétence associée</h1>
+<div mat-dialog-content class="form">
+  <mat-form-field appearance="fill">
+    <mat-label>*Nom</mat-label>
+    <input matInput [(ngModel)]="linkedSkill.name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Fermer</button>
+  <button mat-button [disabled]="linkedSkill.name == null || linkedSkill.name == ''" [mat-dialog-close]="linkedSkill" cdkFocusInitial>Modifier</button>
+</div>

@@ -53,10 +53,6 @@ export class MyExercicesListComponent implements OnInit {
     });
   }
 
-  getAllLinkedSkills(linkedSkills: LinkedSkill[]) {
-    return linkedSkills.map(linkedSkill => linkedSkill.name).join(',');
-  }
-
   addExercise(): void {
     const dialogRef = this.dialog.open(AddExerciseModalComponent, {
       width: '60%',

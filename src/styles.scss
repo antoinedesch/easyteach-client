@@ -21,6 +21,12 @@ body {
   justify-content: center;
 }
 
+.row-centered {
+  display:flex;
+  flex-direction: row;
+  align-items: center
+}
+
 .width-100 {
   width: 100%;
 }
@@ -34,6 +40,4 @@ table {
   width: 100%;
 }
 
-td {
-  width: 20%
-}
+
