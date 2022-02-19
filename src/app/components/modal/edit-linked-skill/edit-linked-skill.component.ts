@@ -15,9 +15,9 @@ export class EditLinkedSkillComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) linkedSkill: LinkedSkill,
   ) {
     if ( linkedSkill.aClass == null) {
-      this.linkedSkill = new LinkedSkill();
+      this.linkedSkill = Object.assign({}, linkedSkill);
+      this.linkedSkill.id = null;
       this.linkedSkill.parent = linkedSkill;
-      this.linkedSkill.name = linkedSkill.name;
     } else {
       this.linkedSkill = linkedSkill;
     }
