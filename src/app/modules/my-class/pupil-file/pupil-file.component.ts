@@ -15,6 +15,7 @@ import {AddPupilModalComponent} from "../../../components/modal/add-pupil-modal/
 import {Pupil} from "../../../models/pupil";
 import {MatDialog} from "@angular/material/dialog";
 import {EditLinkedSkillComponent} from "../../../components/modal/edit-linked-skill/edit-linked-skill.component";
+import {LinkedskillHttpService} from "../../../service/linkedskill-http.service";
 
 export interface SubjectTableData {
   subject: string,
@@ -48,7 +49,11 @@ export class PupilFileComponent implements OnInit {
 
   DATA = [] as any;
 
-  constructor(private skillHttpService: SkillHttpService, private evaluationHttpService: EvaluationHttpService, private route: ActivatedRoute, public dialog: MatDialog) {
+  constructor(private readonly skillHttpService: SkillHttpService,
+              private readonly evaluationHttpService: EvaluationHttpService,
+              private route: ActivatedRoute,
+              public dialog: MatDialog,
+              private readonly linkedSkillHttpService: LinkedskillHttpService) {
   }
 
   skills: Skill[];
@@ -91,6 +96,7 @@ export class PupilFileComponent implements OnInit {
                 let d = {
                   linkedSkill: {
                     name: linkedSkill.name,
+                    id: linkedSkill.id,
                     evaluationScore: this.getEvaluationLinkedSkillValue(linkedSkill)
                   }, skill: undefined, evaluationSkill: undefined
                 };
@@ -179,7 +185,11 @@ export class PupilFileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(linkedSkill => {
-
+      if (linkedSkill) {
+        this.linkedSkillHttpService.saveLinkedSkill(linkedSkill).subscribe((linkedSkill) => {
+          console.log(linkedSkill);
+        })
+      }
     });
 
   }

@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {LinkedSkill} from "../../../models/linked-skill";
 
@@ -7,14 +7,14 @@ import {LinkedSkill} from "../../../models/linked-skill";
   templateUrl: './edit-linked-skill.component.html',
   styleUrls: ['./edit-linked-skill.component.scss']
 })
-export class EditLinkedSkillComponent implements OnInit {
+export class EditLinkedSkillComponent {
 
   linkedSkill: LinkedSkill;
 
   constructor(public dialogRef: MatDialogRef<EditLinkedSkillComponent>,
-              @Inject(MAT_DIALOG_DATA) linkedSkill: LinkedSkill,
+              @Inject(MAT_DIALOG_DATA) linkedSkill: LinkedSkill
   ) {
-    if ( linkedSkill.aClass == null) {
+    if (linkedSkill.aClass == null) {
       this.linkedSkill = Object.assign({}, linkedSkill);
       this.linkedSkill.id = null;
       this.linkedSkill.parent = linkedSkill;
@@ -26,9 +26,6 @@ export class EditLinkedSkillComponent implements OnInit {
 
   onNoClick() {
     this.dialogRef.close();
-  }
-
-  ngOnInit(): void {
   }
 
 }
