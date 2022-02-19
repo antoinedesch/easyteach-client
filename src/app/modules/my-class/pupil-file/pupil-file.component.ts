@@ -104,7 +104,7 @@ export class PupilFileComponent implements OnInit {
                     name: linkedSkill.name,
                     id: linkedSkill.id,
                     skill: {
-                      id: linkedSkill.skill?.id
+                      id: skill.id
                     },
                     evaluationScore: this.getEvaluationLinkedSkillValue(linkedSkill)
                   }, skill: undefined, evaluationSkill: undefined

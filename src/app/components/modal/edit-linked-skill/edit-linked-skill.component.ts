@@ -19,6 +19,7 @@ export class EditLinkedSkillComponent {
         this.linkedSkill = Object.assign({}, linkedSkill);
         this.linkedSkill.id = null;
         this.linkedSkill.parent = linkedSkill;
+        this.linkedSkill.skill = null;
       } else {
         this.linkedSkill = linkedSkill;
       }
