@@ -1,5 +1,5 @@
 import {NgModule, Type} from '@angular/core';
-import {CommonModule, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
@@ -14,38 +14,25 @@ import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
-import {StopPropagationDirective} from "../../directives/stop-propagation.directive";
-import {ConfirmationModalComponent} from "../../components/modal/confirmation-modal/confirmation-modal.component";
-import {nl2brPipe} from "../../pipe/nl2brPipe";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatSelectModule} from "@angular/material/select";
-import {AngularMaterialModule} from "../angular-material/angular-material.module";
-
-const COMPONENTS: Type<any>[] = [
-  ConfirmationModalComponent
-]
-
-const DIRECTIVES: Type<any>[] = [
-  StopPropagationDirective
-]
-
-const PIPES: Type<any>[] = [
-  nl2brPipe
-]
 
 const MODULES: Type<any>[] = [
-  CommonModule,
-  FormsModule,
-  AngularMaterialModule
+  MatSidenavModule, MatToolbarModule, MatIconModule, MatDividerModule, CommonModule,
+  MatButtonModule, MatButtonModule,
+  MatIconModule,
+  MatFormFieldModule, MatTableModule, MatPaginatorModule, MatInputModule, MatSortModule,
+  FormsModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatSliderModule, MatSelectModule, MatOptionModule
 ]
 
+
 @NgModule({
-  declarations: [...COMPONENTS, ...DIRECTIVES, ...PIPES],
+  declarations: [],
   imports: [
-    ...MODULES
+    CommonModule,
+    MODULES
   ],
-  exports: [...MODULES, ...COMPONENTS, ...DIRECTIVES, ...PIPES],
-  providers: [DatePipe]
+  exports: [MODULES]
 })
-export class SharedModule {
+export class AngularMaterialModule {
 }
