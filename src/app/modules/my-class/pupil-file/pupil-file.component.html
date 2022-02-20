@@ -1,8 +1,8 @@
 <div class="mat-elevation-z8">
-  <table border="1" mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
 
     <ng-container matColumnDef="subject">
-      <th mat-header-cell *matHeaderCellDef> Matières</th>
+      <th mat-header-cell *matHeaderCellDef>Matières</th>
       <ng-container *matCellDef="let data">
         <td style="width: 5%;" mat-cell *ngIf="data.subject" [attr.rowspan]="rowspandatasubject[data.subject]">
           <span>{{ getSubjectName(data.subject) }}</span>
@@ -32,12 +32,12 @@
       <th mat-header-cell *matHeaderCellDef> Compétences associées </th>
       <ng-container *matCellDef="let data">
         <td mat-cell *ngIf="data.linkedSkill" >
-          <div  style="padding: 1%"  class="row-centered" *ngIf="data.linkedSkill.id">
+          <div  style="padding: 1%"  class="row-centered width-100" *ngIf="data.linkedSkill.id">
             <div [innerHTML]="data.linkedSkill.name | nl2br"></div>
-            <button (click)="onEditLinkedSkill(data.linkedSkill)" style="margin: 1%" ><mat-icon>edit</mat-icon></button>
+            <button (click)="onEditLinkedSkill(data.linkedSkill)"  mat-raised-button style="margin: 1%" ><mat-icon color="primary">edit</mat-icon></button>
           </div>
-          <div *ngIf="!data.linkedSkill.id">
-            <button (click)="onEditLinkedSkill(data.linkedSkill)"  mat-button><mat-icon>add</mat-icon> Ajouter </button>
+          <div class="width-100" *ngIf="!data.linkedSkill.id">
+            <button  color="primary" class="width-100"  (click)="onEditLinkedSkill(data.linkedSkill)"  mat-raised-button><mat-icon>add</mat-icon > Ajouter </button>
           </div>
         </td>
       </ng-container>
@@ -71,7 +71,7 @@
       </ng-container>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 

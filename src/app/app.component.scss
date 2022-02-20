@@ -9,7 +9,7 @@ mat-sidenav {
   margin: 16px;
   width: 200px;
   border-right: none;
-  background: variables.$color2;
+  background: variables.$color1;
   color: white;
   border-radius: 10px;
   padding: 16px;
@@ -37,7 +37,8 @@ mat-sidenav-container {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
 
   mat-icon {
     margin-right: 8px;

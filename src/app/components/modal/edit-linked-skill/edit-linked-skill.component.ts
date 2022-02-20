@@ -11,10 +11,13 @@ export class EditLinkedSkillComponent {
 
   linkedSkill: LinkedSkill;
 
+  editMode: boolean = false;
+
   constructor(public dialogRef: MatDialogRef<EditLinkedSkillComponent>,
               @Inject(MAT_DIALOG_DATA) linkedSkill: LinkedSkill
   ) {
     if (linkedSkill.id) {
+      this.editMode = true;
       if (linkedSkill.aClass == null) {
         this.linkedSkill = Object.assign({}, linkedSkill);
         this.linkedSkill.id = null;

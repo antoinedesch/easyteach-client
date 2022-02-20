@@ -1,8 +1,14 @@
 @use '@angular/material' as mat;
 @use "./styles/typography/config" as typography;
+@use "./assets/scss/variables";
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
 @import '@angular/material/theming';
 @include mat.core(typography.$my-app-typography);
+
+@font-face {
+  font-family: "LetterForLeaner";
+  src: local("LetterForLeaner"), url(assets/fonts/LettersforLearners.ttf) format("truetype");
+}
 
 html, body {
   height: 100%;
@@ -40,7 +46,6 @@ table {
 }
 
 .mat-form-field {
-  font-size: 14px;
   width: 100%;
 }
 
@@ -59,5 +64,39 @@ $my-app-theme: mat.define-light-theme(
 );
 
 @include mat.all-component-themes($my-app-theme);
+
+table {
+  margin: 25px 0;
+  border: 1px solid;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table, th, td {
+  border: thin solid gray;
+}
+
+td {
+  padding: 10px !important;
+}
+
+.mat-header-cell {
+  background-color: variables.$color1;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.mat-cell {
+  padding: 10px;
+}
+
+
+
+
+
+
 
 

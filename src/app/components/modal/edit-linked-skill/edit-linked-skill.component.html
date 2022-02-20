@@ -7,5 +7,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Fermer</button>
-  <button mat-button [disabled]="linkedSkill.name == null || linkedSkill.name == ''" [mat-dialog-close]="linkedSkill" cdkFocusInitial>Modifier</button>
+  <button mat-button [disabled]="linkedSkill.name == null || linkedSkill.name == ''" [mat-dialog-close]="linkedSkill" cdkFocusInitial>{{ editMode ? "Modifier" : "Ajouter"}}</button>
 </div>
