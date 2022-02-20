@@ -14,8 +14,8 @@
 
     <img class="avatar mat-elevation-z8" src="/assets/prz.jpg"/>
 
-    <h4 *ngIf="user" class="name">{{ user.surname.toUpperCase() + ' ' + user.firstName}}</h4>
-    <p *ngIf="user" class="designation">{{user.profile.valueOf()}}</p>
+    <h1 *ngIf="user" class="name">{{ user.surname.toUpperCase() + ' ' + user.firstName}}</h1>
+    <h2 *ngIf="user" class="designation">{{user.profile.valueOf()}}</h2>
 
     <mat-divider></mat-divider>
 
