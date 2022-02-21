@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:8080",
-  keycloakUrl: "http://localhost:8180/auth",
-  keycloakRealm: "easyteach-keycloack",
-  keycloakClient: "easyteach-front-client"
+  apiUrl: window["env"]["apiUrl"] || "default",
+  keycloakUrl: window["env"]["keycloakUrl"] || "default",
+  keycloakRealm: window["env"]["keycloakRealm"] || "default",
+  keycloakClient: window["env"]["keycloakClient"] || "default",
 };
 
 /*
