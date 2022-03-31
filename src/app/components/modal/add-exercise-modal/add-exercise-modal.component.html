@@ -26,7 +26,7 @@
         <mat-label>Chercher par compétence </mat-label>
         <input matInput placeholder ="Chercher..." (keyup)="onKey($event.target)">
       </mat-form-field>
-      <mat-optgroup *ngFor="let skill of skills" [label]="skill.name">
+      <mat-optgroup *ngFor="let skill of skills" [label]="skill.objective.name">
         <mat-option *ngFor="let linkedSkill of skill.linkedSkills" [value]="linkedSkill">
           {{linkedSkill.name}}
         </mat-option>

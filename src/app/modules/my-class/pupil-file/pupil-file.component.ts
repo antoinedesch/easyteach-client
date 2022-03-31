@@ -33,7 +33,7 @@ export interface ObjectiveSkills {
 })
 export class PupilFileComponent implements OnInit {
 
-  displayedColumns: string[] = ['subject', 'objectives', 'skills', 'linkedSkills', 'evaluationLinkedSkill', 'evaluation'];
+  displayedColumns: string[] = ['subject', 'objectives', 'linkedSkills', 'evaluationLinkedSkill', 'evaluation'];
   dataSource: MatTableDataSource<SubjectTableData>;
 
   @ViewChild(MatSort) sort: MatSort;
