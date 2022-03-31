@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 
 const routes: Routes = [
   {
-    path: '', canActivate: [AuthGuard], children: [
+    path: '', canActivate: [AuthGuard],  children: [
       {
         path: 'my-class',
         loadChildren: (): Type<any> | NgModuleFactory<any> | Observable<Type<any>> | Promise<any> => import('./modules/my-class/my-class.module').then((module) => module.MyClassModule)
@@ -17,6 +17,10 @@ const routes: Routes = [
       {
         path: 'my-exercises',
         loadChildren: (): Type<any> | NgModuleFactory<any> | Observable<Type<any>> | Promise<any> => import('./modules/my-exercises/my-exercises.module').then((module) => module.MyExercisesModule)
+      },
+      {
+        path: 'lsu',
+        loadChildren: (): Type<any> | NgModuleFactory<any> | Observable<Type<any>> | Promise<any> => import('./modules/lsu/lsu.module').then((module) => module.LsuModule)
       },
     ]
   }
