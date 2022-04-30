@@ -171,6 +171,18 @@ export class PupilFileComponent implements OnInit {
         return "Français";
       case Subject.MATHEMATICS.valueOf():
         return "Mathématiques";
+      case Subject.ASK_THE_WORLD.valueOf(): 
+        return "Questionner le monde";
+      case Subject.CIVIC_EDUCATION.valueOf(): 
+        return "Education civique";
+      case Subject.MODERN_LANGUAGE.valueOf(): 
+        return "Langue vivante";
+      case Subject.ART.valueOf(): 
+        return "Art";
+      case Subject.MUSIC.valueOf():
+        return "Musique";
+      case Subject.SPORT.valueOf(): 
+        return "Education physique et sportive";
       default:
         return "Matière inconnue";
     }
@@ -191,6 +203,8 @@ export class PupilFileComponent implements OnInit {
   onEditLinkedSkill(linkedSkill: LinkedSkill) {
     const dialogRef = this.dialog.open(EditLinkedSkillComponent, {
       width: '30%',
+      autoFocus: false,
+      maxHeight: '90vh',
       data: linkedSkill
     });
 

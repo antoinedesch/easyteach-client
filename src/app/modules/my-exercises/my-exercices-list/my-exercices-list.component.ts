@@ -44,6 +44,8 @@ export class MyExercicesListComponent implements OnInit {
     const index = this.dataSource.data.map(e => e.id).indexOf(id);
     const dialogRef = this.dialog.open(PupilsExerciseModalComponent, {
       width: "50%",
+      autoFocus: false,
+      maxHeight: '90vh',
       data: this.dataSource.data[index]
     });
 
@@ -56,6 +58,8 @@ export class MyExercicesListComponent implements OnInit {
   addExercise(): void {
     const dialogRef = this.dialog.open(AddExerciseModalComponent, {
       width: '60%',
+      autoFocus: false,
+      maxHeight: '90vh',
       data: new Exercise()
     });
 

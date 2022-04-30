@@ -41,6 +41,8 @@ export class PupilsListComponent implements OnInit {
   addPupil() {
     const dialogRef = this.dialog.open(AddPupilModalComponent, {
       width: '30%',
+      autoFocus: false,
+      maxHeight: '90vh',
       data: new Pupil()
     });
 
@@ -62,6 +64,8 @@ export class PupilsListComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
       maxWidth: "400px",
+      autoFocus: false,
+      maxHeight: '90vh',
       data: dialogData
     });
 
