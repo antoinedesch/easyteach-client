@@ -1,3 +1,4 @@
+import { KeycloakService } from 'keycloak-angular';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {BreakpointObserver} from "@angular/cdk/layout";
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
 
   user: User;
 
-  constructor(private observer: BreakpointObserver, private userHttpService: UserHttpService) {
+  constructor(private observer: BreakpointObserver, private userHttpService: UserHttpService, private keycloakService: KeycloakService) {
   }
 
 
@@ -42,5 +43,9 @@ export class AppComponent implements OnInit {
     this.userHttpService.getConnectedUser().subscribe(user => {
       this.user = user;
     })
+  }
+
+  logout(): void {
+    this.keycloakService.logout();
   }
 }
