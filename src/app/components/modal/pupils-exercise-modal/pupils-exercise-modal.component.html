@@ -19,6 +19,7 @@
       <th mat-header-cell *matHeaderCellDef> Evaluation</th>
       <td *matCellDef="let data">
         <mat-slider
+          *ngIf="!data.evaluation.absent"
           (input)="onEvaluationSlide(data,$event)"
           [(ngModel)]="data.evaluation.score"
           class="width-100"
@@ -29,6 +30,13 @@
           min="0"
           max="100"
           aria-label="units"></mat-slider>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="absent">
+      <th mat-header-cell *matHeaderCellDef> Absent</th>
+      <td *matCellDef="let data">
+        <mat-slide-toggle [checked]="data.evaluation.absent" (change)="changeAbsent($event,data.evaluation)"></mat-slide-toggle>
       </td>
     </ng-container>
 

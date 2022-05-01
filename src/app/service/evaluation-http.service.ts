@@ -25,4 +25,8 @@ export class EvaluationHttpService {
   addEvaluation(evaluation:Evaluation):Observable<Evaluation> {
     return this.httpClient.post<Evaluation>(environment.apiUrl + '/api/evaluation', evaluation).pipe(map((evaluation:Evaluation) => evaluation));
   }
+
+  changeAbsent(absent: boolean, id: number): Observable<void> {
+    return this.httpClient.post(environment.apiUrl + `/api/evaluation/absent/${id}/${absent}`, {}).pipe(map(()=> {}));
+  }
 }

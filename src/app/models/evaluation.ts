@@ -21,6 +21,8 @@ export class Evaluation extends GenericModel{
 
   evaluationType:EvaluationType;
 
+  absent: boolean;
+
   constructor() {
     super();
     this.score = 0;

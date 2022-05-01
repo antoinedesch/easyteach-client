@@ -6,7 +6,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {EvaluationPupil} from "../../../models/evaluation-pupil";
 import {Evaluation} from "../../../models/evaluation";
-import {debounceTime, distinctUntilChanged, Subject} from "rxjs";
+import {debounceTime, Subject} from "rxjs";
 import {MatSliderChange} from "@angular/material/slider";
 import {EvaluationType} from "../../../models/enums/evaluation-type";
 
@@ -20,7 +20,7 @@ export class PupilsExerciseModalComponent implements OnInit {
 
   evaluationChangedArray: Subject<Evaluation>[] = [];
 
-  displayedColumns: string[] = ['surname', 'firstname', 'evaluation'];
+  displayedColumns: string[] = ['surname', 'firstname', 'evaluation', 'absent'];
   dataSource: MatTableDataSource<EvaluationPupil>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -81,4 +81,9 @@ export class PupilsExerciseModalComponent implements OnInit {
   }
 
 
+  changeAbsent(event: any, evaluation: Evaluation) {
+    this.evaluationHttpService.changeAbsent(event.checked, evaluation.id).subscribe(() => {
+      evaluation.absent = event.checked;
+    })
+  }
 }
