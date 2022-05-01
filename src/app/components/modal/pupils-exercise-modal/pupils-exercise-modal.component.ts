@@ -81,9 +81,19 @@ export class PupilsExerciseModalComponent implements OnInit {
   }
 
 
-  changeAbsent(event: any, evaluation: Evaluation) {
-    this.evaluationHttpService.changeAbsent(event.checked, evaluation.id).subscribe(() => {
-      evaluation.absent = event.checked;
-    })
+  changeAbsent(event: any, evaluationPupil: EvaluationPupil) {
+    if ( evaluationPupil.evaluation.id) {
+      this.evaluationHttpService.changeAbsent(event.checked, evaluationPupil.evaluation.id).subscribe(() => {
+        evaluationPupil.evaluation.absent = event.checked;
+      })
+    } else {
+      evaluationPupil.evaluation.absent = event.checked;
+      evaluationPupil.evaluation.score = event.value;
+      evaluationPupil.evaluation.pupil = evaluationPupil.pupil;
+      evaluationPupil.evaluation.exercise = this.exercise;
+      evaluationPupil.evaluation.evaluationType = EvaluationType.EXERCISE;
+      this.sendEvaluation(evaluationPupil.evaluation);
+    }
+
   }
 }

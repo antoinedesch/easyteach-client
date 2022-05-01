@@ -36,7 +36,7 @@
     <ng-container matColumnDef="absent">
       <th mat-header-cell *matHeaderCellDef> Absent</th>
       <td *matCellDef="let data">
-        <mat-slide-toggle [checked]="data.evaluation.absent" (change)="changeAbsent($event,data.evaluation)"></mat-slide-toggle>
+        <mat-slide-toggle [checked]="data.evaluation.absent" (change)="changeAbsent($event,data)"></mat-slide-toggle>
       </td>
     </ng-container>
 
