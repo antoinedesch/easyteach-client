@@ -47,8 +47,9 @@
       <th mat-header-cell *matHeaderCellDef> Evaluations compétences associées</th>
       <ng-container *matCellDef="let data">
         <td style="width: 20%" mat-cell *ngIf="data.linkedSkill">
+          <p *ngIf="data.linkedSkill?.evaluationScore && data.linkedSkill?.evaluationScore == 'Absent'"> Absent </p>
           <mat-slider
-            *ngIf="data.linkedSkill?.evaluationScore != null"
+            *ngIf="data.linkedSkill?.evaluationScore != null && data.linkedSkill?.evaluationScore !== 'Absent'"
             [(ngModel)]="data.linkedSkill.evaluationScore"
             class="width-100"
             thumbLabel

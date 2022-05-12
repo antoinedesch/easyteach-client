@@ -131,22 +131,23 @@ export class PupilFileComponent implements OnInit {
 
   }
 
-  getEvaluationValueString(value: EvaluationValue): string {
-    switch (value) {
-      case EvaluationValue.ACQUIRE:
+  getEvaluationValueString(evaluation: Evaluation): string {
+    if (evaluation.absent) {
+      return "Absent";
+    }
+    switch (evaluation.value) {
+      case EvaluationValue.ACQUIRED:
         return 'ACQUIS';
       case EvaluationValue.BEING_ACQUIRED:
         return 'EN COURS D\'ACQUISITION';
       case EvaluationValue.NON_ACQUIRED:
         return 'NON ACQUIS';
-      case EvaluationValue.ABSENT:
-        return 'ABSENT';
     }
   }
 
   getEvaluationValue(skill: Skill): string {
     let evaluation: Evaluation = this.evaluations.filter((evaluation) => evaluation.skill && evaluation.skill.id === skill.id)[0];
-    return evaluation ? this.getEvaluationValueString(evaluation.value) : ""
+    return evaluation ? this.getEvaluationValueString(evaluation) : ""
   }
 
   createSkillTableData(): any {
@@ -171,17 +172,17 @@ export class PupilFileComponent implements OnInit {
         return "Français";
       case Subject.MATHEMATICS.valueOf():
         return "Mathématiques";
-      case Subject.ASK_THE_WORLD.valueOf(): 
+      case Subject.ASK_THE_WORLD.valueOf():
         return "Questionner le monde";
-      case Subject.CIVIC_EDUCATION.valueOf(): 
+      case Subject.CIVIC_EDUCATION.valueOf():
         return "Education civique";
-      case Subject.MODERN_LANGUAGE.valueOf(): 
+      case Subject.MODERN_LANGUAGE.valueOf():
         return "Langue vivante";
-      case Subject.ART.valueOf(): 
+      case Subject.ART.valueOf():
         return "Art";
       case Subject.MUSIC.valueOf():
         return "Musique";
-      case Subject.SPORT.valueOf(): 
+      case Subject.SPORT.valueOf():
         return "Education physique et sportive";
       default:
         return "Matière inconnue";
@@ -192,9 +193,12 @@ export class PupilFileComponent implements OnInit {
     return this.skills.filter(skill => skill.objective.id == objectiveId)[0].objective.name;
   }
 
-  getEvaluationLinkedSkillValue(linkedSkill: LinkedSkill): number | null {
+  getEvaluationLinkedSkillValue(linkedSkill: LinkedSkill): number | string | null {
     let pupilEvaluations = this.evaluations.filter((evaluation) => evaluation.evaluationType == EvaluationType.LINKED_SKILL && (evaluation.linkedSkill.id == linkedSkill.id || (linkedSkill.parent && evaluation.linkedSkill.id == linkedSkill.parent.id)));
     if (pupilEvaluations.length > 0) {
+      if (pupilEvaluations[0].absent) {
+        return "Absent";
+      }
       return pupilEvaluations[0].score;
     }
     return null;
