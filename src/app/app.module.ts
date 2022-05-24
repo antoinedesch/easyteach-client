@@ -26,6 +26,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       bearerPrefix: 'Bearer',
       bearerExcludedUrls: [
         '/assets',
+        '/.well-known/pki-validation',
         '/clients/public']
     });
 }

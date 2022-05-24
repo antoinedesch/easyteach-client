@@ -41,7 +41,9 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/.well-known/pki-validation/E029714D13827F10A1FC82DDCFCDAC32.txt",
+              { "glob": "E029714D13827F10A1FC82DDCFCDAC32.txt", "input": "src/.well-known/pki-validation", "output": "/" }
             ],
             "styles": [
               "src/styles.scss",
