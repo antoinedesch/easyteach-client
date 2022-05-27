@@ -4,20 +4,21 @@ import {Exercise} from "../../../models/exercise";
 import {Section} from "../../../models/enums/section";
 import {SkillHttpService} from "../../../service/skill-http.service";
 import {Skill} from "../../../models/skill";
+import {LinkedSkill} from "../../../models/linked-skill";
 
 @Component({
   selector: 'app-add-exercise-modal',
-  templateUrl: './add-exercise-modal.component.html',
-  styleUrls: ['./add-exercise-modal.component.scss']
+  templateUrl: './exercise-edition-modal.component.html',
+  styleUrls: ['./exercise-edition-modal.component.scss']
 })
-export class AddExerciseModalComponent implements OnInit {
+export class ExerciseEditionModalComponent implements OnInit {
 
   skills: Skill[];
 
   savedSkills: Skill[];
 
   constructor(
-    public dialogRef: MatDialogRef<AddExerciseModalComponent>,
+    public dialogRef: MatDialogRef<ExerciseEditionModalComponent>,
     @Inject(MAT_DIALOG_DATA) public exercise: Exercise,
     private skillHttpService: SkillHttpService
   ) {
@@ -61,6 +62,10 @@ export class AddExerciseModalComponent implements OnInit {
       }
     })
     return res;
+  }
+
+  compareLinkedSkill(linkedSkill1: LinkedSkill, linkedSkill2: LinkedSkill): boolean {
+    return linkedSkill1?.id == linkedSkill2?.id;
   }
 
   onKey(event: any) {

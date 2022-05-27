@@ -20,11 +20,11 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label> Compétences associées </mat-label>
-    <mat-select [(ngModel)]="exercise.linkedSkills" multiple>
+    <mat-label> Compétences associées</mat-label>
+    <mat-select [compareWith]="compareLinkedSkill" [(ngModel)]="exercise.linkedSkills" multiple>
       <mat-form-field appearance="fill">
-        <mat-label>Chercher par compétence </mat-label>
-        <input matInput placeholder ="Chercher..." (keyup)="onKey($event.target)">
+        <mat-label>Chercher par compétence</mat-label>
+        <input matInput placeholder="Chercher..." (keyup)="onKey($event.target)">
       </mat-form-field>
       <mat-optgroup *ngFor="let skill of skills" [label]="skill.objective.name">
         <mat-option *ngFor="let linkedSkill of skill.linkedSkills" [value]="linkedSkill">
@@ -36,7 +36,8 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Fermer</button>
-  <button mat-button [disabled]="isSaveDisable()" [mat-dialog-close]="exercise" cdkFocusInitial>Ajouter</button>
+  <button mat-button [disabled]="isSaveDisable()" [mat-dialog-close]="exercise"
+          cdkFocusInitial>{{exercise.id ? "Modifier" : "Ajouter" }}</button>
 </div>
 
 

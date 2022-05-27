@@ -21,4 +21,8 @@ export class ExerciceHttpService {
     return this.httpClient.post<Exercise>(environment.apiUrl + "/api/exercise",exercise).pipe(map(exercice => exercice));
   }
 
+  editExercise(exercise: Exercise): Observable<Exercise> {
+    return this.httpClient.post<Exercise>(environment.apiUrl + "/api/exercise/edit",exercise).pipe(map(exercice => exercice));
+  }
+
 }

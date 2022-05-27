@@ -8,14 +8,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {
   PupilsExerciseModalComponent
 } from "../../../components/modal/pupils-exercise-modal/pupils-exercise-modal.component";
-import {LinkedSkill} from "../../../models/linked-skill";
 import {
-  ConfirmationModalComponent,
-  ConfirmDialogModel
-} from "../../../components/modal/confirmation-modal/confirmation-modal.component";
-import {AddPupilModalComponent} from "../../../components/modal/add-pupil-modal/add-pupil-modal.component";
-import {Pupil} from "../../../models/pupil";
-import {AddExerciseModalComponent} from "../../../components/modal/add-exercise-modal/add-exercise-modal.component";
+  ExerciseEditionModalComponent
+} from "../../../components/modal/exercise-edition-modal/exercise-edition-modal.component";
 
 @Component({
   selector: 'app-my-exercices-list',
@@ -24,13 +19,14 @@ import {AddExerciseModalComponent} from "../../../components/modal/add-exercise-
 })
 export class MyExercicesListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id','name','date','linkedskills'];
+  displayedColumns: string[] = ['id', 'name', 'date', 'linkedskills', 'actions'];
   dataSource: MatTableDataSource<Exercise>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private readonly exerciseHttpService:ExerciceHttpService,public dialog: MatDialog) { }
+  constructor(private readonly exerciseHttpService: ExerciceHttpService, public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.exerciseHttpService.getTeachersAllExercises().subscribe((exercises) => {
@@ -40,7 +36,7 @@ export class MyExercicesListComponent implements OnInit {
     })
   }
 
-  onClickExercise(id:number) {
+  onClickExercise(id: number) {
     const index = this.dataSource.data.map(e => e.id).indexOf(id);
     const dialogRef = this.dialog.open(PupilsExerciseModalComponent, {
       width: "50%",
@@ -50,26 +46,43 @@ export class MyExercicesListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if ( result ) {
+      if (result) {
       }
     });
   }
 
-  addExercise(): void {
-    const dialogRef = this.dialog.open(AddExerciseModalComponent, {
+  editExercise(exercise?: Exercise): void {
+    let exerciseToEdit;
+    if (exercise) {
+      exerciseToEdit = exercise
+    } else {
+      exerciseToEdit = new Exercise()
+    }
+    const dialogRef = this.dialog.open(ExerciseEditionModalComponent, {
       width: '60%',
       autoFocus: false,
       maxHeight: '90vh',
-      data: new Exercise()
+      data: exerciseToEdit
     });
 
     dialogRef.afterClosed().subscribe(exercise => {
       if (exercise) {
-        this.exerciseHttpService.createExercise(exercise).subscribe(exercise => {
-          this.dataSource.data.push(exercise);
-          this.dataSource._updateChangeSubscription()
+        let observable;
+        if (exercise.id) {
+          observable = this.exerciseHttpService.editExercise(exercise);
+        } else {
+          observable = this.exerciseHttpService.createExercise(exercise);
+        }
+        observable.subscribe(exerciseUpdated => {
+          if (!exercise.id) {
+            this.dataSource.data.push(exerciseUpdated);
+            this.dataSource._updateChangeSubscription()
+          } else {
+            this.dataSource._updateChangeSubscription()
+          }
         })
       }
     });
   }
+
 }

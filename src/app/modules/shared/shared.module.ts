@@ -20,6 +20,7 @@ import {nl2brPipe} from "../../pipe/nl2brPipe";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 const COMPONENTS: Type<any>[] = [
   ConfirmationModalComponent
@@ -42,7 +43,7 @@ const MODULES: Type<any>[] = [
   MatFormFieldModule,
   MatTableModule,
   MatPaginatorModule, MatInputModule, MatSortModule,
-  FormsModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatSliderModule, MatSelectModule, MatOptionModule, MatSlideToggleModule
+  FormsModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatSliderModule, MatSelectModule, MatOptionModule, MatSlideToggleModule, MatTooltipModule
 ]
 
 @NgModule({
