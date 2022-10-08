@@ -33,7 +33,7 @@ export interface ObjectiveSkills {
 })
 export class PupilFileComponent implements OnInit {
 
-  displayedColumns: string[] = ['subject', 'objectives', 'linkedSkills', 'evaluationLinkedSkill', 'evaluation'];
+  displayedColumns: string[] = ['subject', 'objectives', 'skills', 'linkedSkills', 'evaluationLinkedSkill', 'evaluation'];
   dataSource: MatTableDataSource<SubjectTableData>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -184,6 +184,10 @@ export class PupilFileComponent implements OnInit {
         return "Musique";
       case Subject.SPORT.valueOf():
         return "Education physique et sportive";
+      case Subject.SCIENCE_AND_TECHNOLOGY.valueOf():
+        return "Science et technologie";
+      case Subject.HISTORY_GEOGRAPHY:
+        return "Histoire geographie";
       default:
         return "Matière inconnue";
     }
